@@ -13,12 +13,12 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-white/10 py-12">
+    <footer className="border-t border-content/10 py-12">
       <div className="container-base">
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-start">
           <div className="max-w-xs">
             <Logo showTagline />
-            <p className="mt-4 text-sm text-white/55">
+            <p className="mt-4 text-sm text-content/55">
               סוכנות דיגיטל שהופכת נוכחות לתוצאות — סושיאל, PPC, SEO, GEO ואוטומציית שיווק.
             </p>
           </div>
@@ -29,7 +29,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
+                    className="text-sm text-content/60 transition-colors hover:text-content"
                   >
                     {item.label}
                   </a>
@@ -46,7 +46,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={s.label}
-                className="glass flex h-10 w-10 items-center justify-center rounded-xl text-white/70 transition-colors hover:text-brand-cyan"
+                className="glass flex h-10 w-10 items-center justify-center rounded-xl text-content/70 transition-colors hover:text-brand-cyan"
               >
                 <s.icon size={18} />
               </a>
@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-sm text-white/40">
+        <div className="mt-10 border-t border-content/10 pt-6 text-center text-sm text-content/40">
           © {year} {brand.name}. כל הזכויות שמורות.
         </div>
       </div>

@@ -23,9 +23,9 @@ export default function Services() {
           <Reveal className="lg:col-span-3">
             <motion.div
               whileHover={{ y: -4 }}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-brand-gradient bg-[length:200%_200%] p-px"
+              className="group relative overflow-hidden rounded-3xl border border-content/10 bg-brand-gradient bg-[length:200%_200%] p-px"
             >
-              <div className="relative grid gap-8 rounded-[calc(1.5rem-1px)] bg-ink-800/95 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
+              <div className="relative grid gap-8 rounded-[calc(1.5rem-1px)] bg-elevated/95 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
                 <div>
                   <div className="mb-5 flex items-center gap-3">
                     <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient text-ink">
@@ -38,7 +38,7 @@ export default function Services() {
                   <h3 className="font-display text-3xl font-extrabold sm:text-4xl">
                     {flagship.title}
                   </h3>
-                  <p className="mt-4 max-w-xl text-lg text-white/65">
+                  <p className="mt-4 max-w-xl text-lg text-content/65">
                     {flagship.description}
                   </p>
                 </div>
@@ -46,7 +46,7 @@ export default function Services() {
                   {flagship.bullets.map((b) => (
                     <li
                       key={b}
-                      className="glass flex items-center gap-3 rounded-xl px-4 py-3 text-white/85"
+                      className="glass flex items-center gap-3 rounded-xl px-4 py-3 text-content/85"
                     >
                       <Check size={18} className="shrink-0 text-brand-emerald" />
                       {b}
@@ -62,18 +62,18 @@ export default function Services() {
             <Reveal key={s.id} delay={i * 0.08}>
               <motion.div
                 whileHover={{ y: -6 }}
-                className="group h-full rounded-3xl border border-white/10 bg-ink-800/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
+                className="group h-full rounded-3xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
               >
-                <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-brand-cyan transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-ink">
+                <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-content/10 bg-content/5 text-brand-cyan transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-ink">
                   <Icon name={s.icon} size={26} />
                 </span>
                 <h3 className="font-display text-xl font-bold">{s.title}</h3>
-                <p className="mt-3 text-white/60">{s.description}</p>
+                <p className="mt-3 text-content/60">{s.description}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {s.bullets.map((b) => (
                     <li
                       key={b}
-                      className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/55"
+                      className="rounded-full border border-content/10 px-3 py-1 text-xs text-content/55"
                     >
                       {b}
                     </li>

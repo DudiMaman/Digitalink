@@ -19,12 +19,12 @@ export default function Hero() {
           className="absolute right-1/3 top-1/3 h-[22rem] w-[22rem] animate-float rounded-full bg-brand-emerald/20 blur-[110px]"
           style={{ animationDelay: '4s' }}
         />
-        {/* רשת עדינה */}
+        {/* רשת עדינה — currentColor מתאים את עצמו לכהה/בהיר */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 text-content opacity-[0.05]"
           style={{
             backgroundImage:
-              'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)',
+              'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
             backgroundSize: '64px 64px',
           }}
         />
@@ -66,7 +66,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="mx-auto mt-7 max-w-2xl text-lg text-white/65 sm:text-xl"
+            className="mx-auto mt-7 max-w-2xl text-lg text-content/65 sm:text-xl"
           >
             {hero.subtitle}
           </motion.p>
@@ -90,7 +90,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-sm uppercase tracking-[0.15em] text-white/40"
+            className="mt-12 text-sm uppercase tracking-[0.15em] text-content/40"
           >
             {hero.proof}
           </motion.p>
@@ -100,7 +100,7 @@ export default function Hero() {
       {/* שם המותג ברקע התחתון */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[18vw] font-black leading-none text-white/[0.03] md:text-[12vw]"
+        className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[18vw] font-black leading-none text-content/[0.03] md:text-[12vw]"
         dir="ltr"
       >
         {brand.name}

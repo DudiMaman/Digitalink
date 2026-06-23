@@ -19,7 +19,7 @@ export default function Portfolio() {
             <Reveal key={c.title} delay={i * 0.07}>
               <motion.article
                 whileHover={{ y: -6 }}
-                className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-ink-800/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
+                className="group relative h-full overflow-hidden rounded-2xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
               >
                 {/* זוהר רקע בהובר */}
                 <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-brand-teal/0 blur-3xl transition-all duration-500 group-hover:bg-brand-teal/20" />
@@ -36,7 +36,7 @@ export default function Portfolio() {
                 <h3 className="relative mt-6 font-display text-xl font-bold">
                   {c.title}
                 </h3>
-                <p className="relative mt-2 text-white/60">{c.result}</p>
+                <p className="relative mt-2 text-content/60">{c.result}</p>
 
                 <span className="relative mt-6 inline-flex items-center gap-1 text-sm font-medium text-brand-teal opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   צפו בפרויקט

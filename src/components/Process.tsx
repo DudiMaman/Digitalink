@@ -19,11 +19,11 @@ export default function Process() {
           {process.steps.map((s, i) => (
             <Reveal key={s.step} delay={i * 0.1} className="relative">
               <div className="flex flex-col items-center text-center md:items-start md:text-start">
-                <span className="relative z-10 flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border border-white/10 bg-ink-800 font-display text-2xl font-black text-gradient">
+                <span className="relative z-10 flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border border-content/10 bg-elevated font-display text-2xl font-black text-gradient">
                   {s.step}
                 </span>
                 <h3 className="mt-5 font-display text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm text-white/60">{s.description}</p>
+                <p className="mt-2 text-sm text-content/60">{s.description}</p>
               </div>
             </Reveal>
           ))}

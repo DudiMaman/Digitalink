@@ -35,7 +35,7 @@ export default function Stats() {
     <section className="relative py-20">
       <div className="container-base">
         <div className="glass overflow-hidden rounded-3xl">
-          <div className="grid divide-white/10 sm:grid-cols-2 sm:divide-x sm:divide-x-reverse lg:grid-cols-4">
+          <div className="grid divide-content/10 sm:grid-cols-2 sm:divide-x sm:divide-x-reverse lg:grid-cols-4">
             {stats.map((s: Stat, i) => (
               <Reveal key={s.label} delay={i * 0.1}>
                 <div className="flex flex-col items-center gap-2 px-6 py-10 text-center">
@@ -46,7 +46,7 @@ export default function Stats() {
                       {s.suffix ?? ''}
                     </span>
                   </div>
-                  <p className="text-sm text-white/60">{s.label}</p>
+                  <p className="text-sm text-content/60">{s.label}</p>
                 </div>
               </Reveal>
             ))}

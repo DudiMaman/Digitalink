@@ -18,16 +18,16 @@ export default function Testimonials() {
                 className="glass flex h-full flex-col rounded-2xl p-7"
               >
                 <Quote className="mb-4 text-brand-teal" size={32} />
-                <blockquote className="flex-1 text-lg leading-relaxed text-white/80">
+                <blockquote className="flex-1 text-lg leading-relaxed text-content/80">
                   "{t.quote}"
                 </blockquote>
-                <figcaption className="mt-6 flex items-center gap-4 border-t border-white/10 pt-5">
+                <figcaption className="mt-6 flex items-center gap-4 border-t border-content/10 pt-5">
                   <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-gradient font-display font-bold text-ink">
                     {t.name.charAt(0)}
                   </span>
                   <div>
                     <div className="font-bold">{t.name}</div>
-                    <div className="text-sm text-white/55">{t.role}</div>
+                    <div className="text-sm text-content/55">{t.role}</div>
                   </div>
                 </figcaption>
               </motion.figure>

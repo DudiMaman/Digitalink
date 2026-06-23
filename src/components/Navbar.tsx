@@ -31,7 +31,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+                className="text-sm font-medium text-content/70 transition-colors hover:text-content"
               >
                 {item.label}
               </a>
@@ -46,7 +46,7 @@ export default function Navbar() {
         {/* כפתור מובייל */}
         <button
           type="button"
-          className="glass rounded-xl p-2.5 text-white lg:hidden"
+          className="glass rounded-xl p-2.5 text-content lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'סגירת תפריט' : 'פתיחת תפריט'}
           aria-expanded={open}
@@ -64,7 +64,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  className="block rounded-xl px-4 py-3 text-base font-medium text-content/80 transition-colors hover:bg-content/10 hover:text-content"
                 >
                   {item.label}
                 </a>

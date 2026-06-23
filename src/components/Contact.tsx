@@ -69,7 +69,7 @@ export default function Contact() {
   }
 
   const inputBase =
-    'w-full rounded-xl border bg-ink-800/70 px-4 py-3 text-white placeholder-white/35 outline-none transition-colors focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/30'
+    'w-full rounded-xl border bg-elevated/70 px-4 py-3 text-content placeholder-content/35 outline-none transition-colors focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/30'
 
   return (
     <section id="contact" className="relative py-24 sm:py-32">
@@ -99,7 +99,7 @@ export default function Contact() {
                 </span>
                 <div>
                   <div className="font-bold">WhatsApp</div>
-                  <div className="text-sm text-white/55">המענה המהיר ביותר</div>
+                  <div className="text-sm text-content/55">המענה המהיר ביותר</div>
                 </div>
               </a>
 
@@ -107,12 +107,12 @@ export default function Contact() {
                 href={contactInfo.phoneHref}
                 className="glass group flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-brand-teal/40"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-brand-cyan">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-content/10 bg-content/5 text-brand-cyan">
                   <Phone size={22} />
                 </span>
                 <div>
                   <div className="font-bold">טלפון</div>
-                  <div dir="ltr" className="text-sm text-white/55">
+                  <div dir="ltr" className="text-sm text-content/55">
                     {contactInfo.phone}
                   </div>
                 </div>
@@ -122,12 +122,12 @@ export default function Contact() {
                 href={`mailto:${contactInfo.email}`}
                 className="glass group flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-brand-teal/40"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-brand-cyan">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-content/10 bg-content/5 text-brand-cyan">
                   <Mail size={22} />
                 </span>
                 <div>
                   <div className="font-bold">אימייל</div>
-                  <div dir="ltr" className="text-sm text-white/55">
+                  <div dir="ltr" className="text-sm text-content/55">
                     {contactInfo.email}
                   </div>
                 </div>
@@ -141,7 +141,7 @@ export default function Contact() {
               <div className="glass flex h-full flex-col items-center justify-center gap-4 rounded-2xl p-10 text-center">
                 <CheckCircle2 size={56} className="text-brand-emerald" />
                 <h3 className="font-display text-2xl font-bold">תודה רבה!</h3>
-                <p className="max-w-sm text-white/60">
+                <p className="max-w-sm text-content/60">
                   פתחנו עבורכם חלון WhatsApp עם פרטי הפנייה. נחזור אליכם בהקדם 🙂
                 </p>
                 <button
@@ -156,7 +156,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} noValidate className="glass rounded-2xl p-6 sm:p-8">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-white/70">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-content/70">
                       שם מלא
                     </label>
                     <input
@@ -164,14 +164,14 @@ export default function Contact() {
                       type="text"
                       value={form.name}
                       onChange={(e) => update('name', e.target.value)}
-                      className={`${inputBase} ${errors.name ? 'border-red-400' : 'border-white/10'}`}
+                      className={`${inputBase} ${errors.name ? 'border-red-400' : 'border-content/10'}`}
                       placeholder="ישראל ישראלי"
                     />
                     {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="mb-2 block text-sm font-medium text-white/70">
+                    <label htmlFor="phone" className="mb-2 block text-sm font-medium text-content/70">
                       טלפון
                     </label>
                     <input
@@ -180,14 +180,14 @@ export default function Contact() {
                       dir="ltr"
                       value={form.phone}
                       onChange={(e) => update('phone', e.target.value)}
-                      className={`${inputBase} text-right ${errors.phone ? 'border-red-400' : 'border-white/10'}`}
+                      className={`${inputBase} text-right ${errors.phone ? 'border-red-400' : 'border-content/10'}`}
                       placeholder="050-0000000"
                     />
                     {errors.phone && <p className="mt-1 text-xs text-red-400">{errors.phone}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-white/70">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-content/70">
                       אימייל
                     </label>
                     <input
@@ -196,24 +196,24 @@ export default function Contact() {
                       dir="ltr"
                       value={form.email}
                       onChange={(e) => update('email', e.target.value)}
-                      className={`${inputBase} text-right ${errors.email ? 'border-red-400' : 'border-white/10'}`}
+                      className={`${inputBase} text-right ${errors.email ? 'border-red-400' : 'border-content/10'}`}
                       placeholder="name@email.com"
                     />
                     {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="interest" className="mb-2 block text-sm font-medium text-white/70">
+                    <label htmlFor="interest" className="mb-2 block text-sm font-medium text-content/70">
                       תחום עניין
                     </label>
                     <select
                       id="interest"
                       value={form.interest}
                       onChange={(e) => update('interest', e.target.value)}
-                      className={`${inputBase} border-white/10`}
+                      className={`${inputBase} border-content/10`}
                     >
                       {contact.interests.map((opt) => (
-                        <option key={opt} value={opt} className="bg-ink-800">
+                        <option key={opt} value={opt} className="bg-elevated">
                           {opt}
                         </option>
                       ))}
@@ -222,7 +222,7 @@ export default function Contact() {
                 </div>
 
                 <div className="mt-5">
-                  <label htmlFor="message" className="mb-2 block text-sm font-medium text-white/70">
+                  <label htmlFor="message" className="mb-2 block text-sm font-medium text-content/70">
                     איך נוכל לעזור?
                   </label>
                   <textarea
@@ -230,7 +230,7 @@ export default function Contact() {
                     rows={4}
                     value={form.message}
                     onChange={(e) => update('message', e.target.value)}
-                    className={`${inputBase} resize-none ${errors.message ? 'border-red-400' : 'border-white/10'}`}
+                    className={`${inputBase} resize-none ${errors.message ? 'border-red-400' : 'border-content/10'}`}
                     placeholder="ספרו לנו קצת על העסק והיעדים שלכם..."
                   />
                   {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
@@ -240,7 +240,7 @@ export default function Contact() {
                   שליחת הפנייה
                   <Send size={18} />
                 </button>
-                <p className="mt-3 text-center text-xs text-white/40">
+                <p className="mt-3 text-center text-xs text-content/40">
                   השליחה פותחת חלון WhatsApp עם פרטי הפנייה.
                 </p>
               </form>

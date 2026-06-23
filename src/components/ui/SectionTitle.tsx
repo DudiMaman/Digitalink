@@ -29,7 +29,7 @@ export default function SectionTitle({
         {title}
       </h2>
       {subtitle && (
-        <p className="max-w-2xl text-base text-white/60 sm:text-lg">{subtitle}</p>
+        <p className="max-w-2xl text-base text-content/60 sm:text-lg">{subtitle}</p>
       )}
     </Reveal>
   )

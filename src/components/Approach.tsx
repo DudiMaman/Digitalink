@@ -30,7 +30,7 @@ export default function Approach() {
                   <Icon name={item.icon} size={24} />
                 </span>
                 <h3 className="font-display text-lg font-bold">{item.title}</h3>
-                <p className="mt-2 text-sm text-white/60">{item.description}</p>
+                <p className="mt-2 text-sm text-content/60">{item.description}</p>
               </motion.div>
             </Reveal>
           ))}

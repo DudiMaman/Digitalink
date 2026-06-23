@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0A1311" />
 
+    <!-- בחירת theme לפי הנתיב: /v1/ → מצב בהיר, אחרת כהה -->
+    <script>
+      if (location.pathname.includes('/v1')) {
+        document.documentElement.classList.add('light')
+      }
+    </script>
+
     <title>Digital Link | סוכנות דיגיטל — סושיאל, PPC, SEO, GEO ואוטומציה</title>
     <meta
       name="description"

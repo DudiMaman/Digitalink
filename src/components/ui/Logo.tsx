@@ -13,12 +13,12 @@ export default function Logo({ showTagline = false, className = '' }: LogoProps)
   return (
     <div className={`flex items-center gap-2.5 ${className}`} dir="ltr">
       <div className="flex flex-col leading-none">
-        <span className="font-display text-xl font-extrabold tracking-tight text-white sm:text-2xl">
+        <span className="font-display text-xl font-extrabold tracking-tight text-content sm:text-2xl">
           {brand.nameParts.first}{' '}
           <span className="text-gradient">{brand.nameParts.second}</span>
         </span>
         {showTagline && (
-          <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white/45">
+          <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-content/45">
             {brand.tagline}
           </span>
         )}

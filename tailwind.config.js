@@ -4,6 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        // צבעים סמנטיים שמתחלפים בין כהה/בהיר דרך משתני CSS (ראו index.css)
+        surface: 'rgb(var(--c-bg) / <alpha-value>)',
+        elevated: 'rgb(var(--c-elev) / <alpha-value>)',
+        content: 'rgb(var(--c-text) / <alpha-value>)',
         // בסיס כהה בגוון צפחה-טורקיז, נגזר מצבע הלוגו (#3C4A47)
         ink: {
           DEFAULT: '#0A1311',
