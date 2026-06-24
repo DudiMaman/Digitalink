@@ -77,6 +77,20 @@
   }
 }
 
+/* Aurora — תנועת רקע זורמת מבוססת transform (זול לציור, ידידותי למובייל) */
+@keyframes aurora1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, 8%, 0) scale(1.2); }
+}
+@keyframes aurora2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.15); }
+  50% { transform: translate3d(-8%, -5%, 0) scale(1); }
+}
+@keyframes aurora3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5%, -7%, 0) scale(1.25); }
+}
+
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,

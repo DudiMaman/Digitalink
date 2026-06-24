@@ -30,8 +30,9 @@ const he = {
     { label: 'צור קשר', href: '#contact' },
   ],
   hero: {
-    titleLines: ['הופכים נוכחות', 'דיגיטלית לתוצאות'],
-    highlight: 'דיגיטלית',
+    titlePrefix: 'הופכים',
+    rotatingWords: ['נוכחות דיגיטלית', 'סושיאל', 'PPC', 'SEO', 'GEO', 'דאטה'],
+    titleSuffix: 'לתוצאות',
     subtitle:
       'אנחנו בונים מותגים שזוכרים. דגש על סושיאל מדיה שמדבר אל הקהל שלכם, לצד מערך דיגיטל מלא — PPC, SEO, GEO ואוטומציית שיווק — הכל מבוסס דאטה ויצירתיות.',
     primaryCta: 'בואו נדבר',
@@ -187,8 +188,9 @@ const en: Content = {
     { label: 'Contact', href: '#contact' },
   ],
   hero: {
-    titleLines: ['We turn digital presence', 'into real results'],
-    highlight: 'digital',
+    titlePrefix: 'We turn',
+    rotatingWords: ['digital presence', 'social', 'PPC', 'SEO', 'GEO', 'data'],
+    titleSuffix: 'into results',
     subtitle:
       'We build brands people remember. A strong focus on social media that speaks to your audience, alongside a full digital stack — PPC, SEO, GEO and marketing automation — all driven by data and creativity.',
     primaryCta: "Let's talk",
