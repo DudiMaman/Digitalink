@@ -27,7 +27,6 @@ export const nav = [
   { label: 'שירותים', href: '#services' },
   { label: 'הגישה שלנו', href: '#approach' },
   { label: 'תהליך', href: '#process' },
-  { label: 'עבודות', href: '#portfolio' },
   { label: 'צור קשר', href: '#contact' },
 ]
 

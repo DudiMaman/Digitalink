@@ -5,7 +5,6 @@ const sections = [
   { id: 'services', label: 'שירותים' },
   { id: 'approach', label: 'הגישה' },
   { id: 'process', label: 'תהליך' },
-  { id: 'portfolio', label: 'עבודות' },
   { id: 'contact', label: 'צור קשר' },
 ]
 

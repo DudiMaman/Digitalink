@@ -4,8 +4,6 @@ import Services from './components/Services'
 import Approach from './components/Approach'
 import Process from './components/Process'
 import Stats from './components/Stats'
-import Portfolio from './components/Portfolio'
-import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollProgress from './components/ui/ScrollProgress'
@@ -25,8 +23,6 @@ export default function App() {
         <Approach />
         <Process />
         <Stats />
-        <Portfolio />
-        <Testimonials />
         <Contact />
       </main>
       <Footer />
