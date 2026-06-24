@@ -8,21 +8,21 @@ import Portfolio from './components/Portfolio'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import Preloader from './components/ui/Preloader'
 import ScrollProgress from './components/ui/ScrollProgress'
 import SectionNav from './components/ui/SectionNav'
 import CursorGlow from './components/ui/CursorGlow'
+import Marquee from './components/ui/Marquee'
 
 export default function App() {
   return (
     <>
-      <Preloader />
       <CursorGlow />
       <ScrollProgress />
       <SectionNav />
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <Services />
         <Approach />
         <Process />
