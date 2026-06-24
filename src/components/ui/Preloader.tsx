@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { brand } from '../../data/content'
 
-/** מסך פתיחה — חץ הלוגו "מצייר את עצמו" ואז האתר נחשף. */
+/** מסך פתיחה — סמל המותג נכנס וחץ הצמיחה "מצייר את עצמו", ואז האתר נחשף. */
 export default function Preloader() {
   const [done, setDone] = useState(false)
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const t = setTimeout(() => setDone(true), reduce ? 150 : 1750)
+    const t = setTimeout(() => setDone(true), reduce ? 150 : 2200)
     return () => clearTimeout(t)
   }, [])
 
@@ -22,30 +22,39 @@ export default function Preloader() {
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         >
           <div className="flex flex-col items-center gap-5" dir="ltr">
-            <svg viewBox="0 0 32 32" className="h-16 w-16" fill="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="pre-arrow" x1="0" y1="32" x2="32" y2="0">
-                  <stop offset="0%" stopColor="#22D3EE" />
-                  <stop offset="50%" stopColor="#14B8A6" />
-                  <stop offset="100%" stopColor="#10B981" />
-                </linearGradient>
-              </defs>
-              <motion.path
-                d="M8 24 L24 8 M24 8 H12 M24 8 V20"
-                stroke="url(#pre-arrow)"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.1, ease: 'easeInOut' }}
-              />
-            </svg>
             <motion.span
-              className="font-display text-2xl font-extrabold tracking-tight text-content"
+              className="grid h-20 w-20 place-items-center rounded-2xl bg-brand-gradient shadow-xl shadow-brand-teal/30"
+              initial={{ scale: 0.6, opacity: 0, rotate: -8 }}
+              animate={{ scale: 1, opacity: 1, rotate: 0 }}
+              transition={{ duration: 0.5, ease: 'backOut' }}
+            >
+              <svg viewBox="0 0 24 24" className="h-11 w-11" fill="none" aria-hidden="true">
+                <motion.path
+                  d="M6 18 L18 6"
+                  stroke="white"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.7, ease: 'easeInOut', delay: 0.35 }}
+                />
+                <motion.path
+                  d="M10.5 6 H18 V13.5"
+                  stroke="white"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.45, ease: 'easeInOut', delay: 0.95 }}
+                />
+              </svg>
+            </motion.span>
+            <motion.span
+              className="font-display text-2xl font-extrabold tracking-[0.04em] text-content"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
+              transition={{ delay: 1.25, duration: 0.5 }}
             >
               {brand.nameParts.first}{' '}
               <span className="text-gradient">{brand.nameParts.second}</span>

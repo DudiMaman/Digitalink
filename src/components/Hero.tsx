@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion'
 import { ArrowUpLeft } from 'lucide-react'
 import { hero, brand } from '../data/content'
-import NetworkCanvas from './ui/NetworkCanvas'
+import CyberGrid from './ui/CyberGrid'
 import Magnetic from './ui/Magnetic'
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[80vh] flex-col justify-start overflow-hidden pt-28 sm:pt-32"
+      className="relative flex min-h-[85vh] flex-col justify-start overflow-hidden pt-36 sm:pt-44"
     >
       {/* רקע גרדיאנט נע + צורות מרחפות */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -22,16 +22,8 @@ export default function Hero() {
           style={{ animationDelay: '4s' }}
         />
         {/* רשת עדינה — currentColor מתאים את עצמו לכהה/בהיר */}
-        <div
-          className="absolute inset-0 text-content opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
-            backgroundSize: '64px 64px',
-          }}
-        />
-        {/* רשת דיגיטלית אינטראקטיבית */}
-        <NetworkCanvas />
+        {/* רשת סייבר עדינה עם פולסים זורמים */}
+        <CyberGrid />
       </div>
 
       <div className="container-base">
