@@ -7,7 +7,7 @@ import Tilt from './ui/Tilt'
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-16 sm:py-24">
+    <section id="services" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
           eyebrow="מה אנחנו עושים"
