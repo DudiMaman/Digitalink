@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Phone, Mail, MessageCircle, Send, CheckCircle2 } from 'lucide-react'
+import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import { contact, contactInfo } from '../data/content'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
@@ -13,6 +13,7 @@ type FormState = {
 }
 
 type Errors = Partial<Record<keyof FormState, string>>
+type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 const empty: FormState = {
   name: '',
@@ -22,14 +23,10 @@ const empty: FormState = {
   message: '',
 }
 
-const whatsappLink = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-  contactInfo.whatsappText,
-)}`
-
 export default function Contact() {
   const [form, setForm] = useState<FormState>(empty)
   const [errors, setErrors] = useState<Errors>({})
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<Status>('idle')
 
   const update = (key: keyof FormState, value: string) => {
     setForm((f) => ({ ...f, [key]: value }))
@@ -47,108 +44,63 @@ export default function Contact() {
     return Object.keys(next).length === 0
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!validate()) return
-
-    // ברירת מחדל ללא backend: פתיחת וואטסאפ עם פרטי הפנייה.
-    // להמשך: כאן ניתן לחבר Formspree / EmailJS / endpoint משלכם.
-    const text =
-      `שם: ${form.name}\n` +
-      `טלפון: ${form.phone}\n` +
-      `אימייל: ${form.email}\n` +
-      `תחום עניין: ${form.interest}\n` +
-      `הודעה: ${form.message}`
-    window.open(
-      `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(text)}`,
-      '_blank',
-      'noopener',
-    )
-    setSent(true)
-    setForm(empty)
+    if (!validate() || status === 'sending') return
+    setStatus('sending')
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${contactInfo.email}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          שם: form.name,
+          טלפון: form.phone,
+          אימייל: form.email,
+          'תחום עניין': form.interest,
+          הודעה: form.message,
+          _subject: `פנייה חדשה מהאתר — ${form.name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      })
+      const data = await res.json()
+      if (res.ok && String(data.success) === 'true') {
+        setStatus('sent')
+        setForm(empty)
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   const inputBase =
     'w-full rounded-xl border bg-elevated/70 px-4 py-3 text-content placeholder-content/35 outline-none transition-colors focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/30'
 
   return (
-    <section id="contact" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
+    <section
+      id="contact"
+      className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24"
+    >
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
         <div className="h-[28rem] w-[28rem] rounded-full bg-brand-emerald/10 blur-[150px]" />
       </div>
 
       <div className="container-base">
-        <SectionTitle
-          eyebrow="צרו קשר"
-          title={contact.title}
-          subtitle={contact.subtitle}
-        />
+        <SectionTitle eyebrow="צרו קשר" title={contact.title} subtitle={contact.subtitle} />
 
-        <div className="grid gap-8 lg:grid-cols-5">
-          {/* פרטי קשר מהירים */}
-          <Reveal className="lg:col-span-2">
-            <div className="flex h-full flex-col gap-4">
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener"
-                className="glass group flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-brand-teal/40"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-ink">
-                  <MessageCircle size={24} />
-                </span>
-                <div>
-                  <div className="font-bold">WhatsApp</div>
-                  <div className="text-sm text-content/55">המענה המהיר ביותר</div>
-                </div>
-              </a>
-
-              <a
-                href={contactInfo.phoneHref}
-                className="glass group flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-brand-teal/40"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-content/10 bg-content/5 text-brand-cyan">
-                  <Phone size={22} />
-                </span>
-                <div>
-                  <div className="font-bold">טלפון</div>
-                  <div dir="ltr" className="text-sm text-content/55">
-                    {contactInfo.phone}
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="glass group flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-brand-teal/40"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-content/10 bg-content/5 text-brand-cyan">
-                  <Mail size={22} />
-                </span>
-                <div>
-                  <div className="font-bold">אימייל</div>
-                  <div dir="ltr" className="text-sm text-content/55">
-                    {contactInfo.email}
-                  </div>
-                </div>
-              </a>
-            </div>
-          </Reveal>
-
-          {/* טופס */}
-          <Reveal delay={0.1} className="lg:col-span-3">
-            {sent ? (
-              <div className="glass flex h-full flex-col items-center justify-center gap-4 rounded-2xl p-10 text-center">
+        {/* טופס ממורכז */}
+        <div className="mx-auto max-w-2xl">
+          <Reveal>
+            {status === 'sent' ? (
+              <div className="glass flex flex-col items-center justify-center gap-4 rounded-2xl p-10 text-center">
                 <CheckCircle2 size={56} className="text-brand-emerald" />
                 <h3 className="font-display text-2xl font-bold">תודה רבה!</h3>
                 <p className="max-w-sm text-content/60">
-                  פתחנו עבורכם חלון WhatsApp עם פרטי הפנייה. נחזור אליכם בהקדם 🙂
+                  קיבלנו את פנייתכם והיא נשלחה אלינו במייל. נחזור אליכם בהקדם 🙂
                 </p>
-                <button
-                  type="button"
-                  onClick={() => setSent(false)}
-                  className="btn-ghost mt-2"
-                >
+                <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-2">
                   שליחת פנייה נוספת
                 </button>
               </div>
@@ -236,13 +188,21 @@ export default function Contact() {
                   {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
                 </div>
 
-                <button type="submit" className="btn-primary mt-6 w-full">
-                  שליחת הפנייה
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {status === 'sending' ? 'שולח…' : 'שליחת הפנייה'}
                   <Send size={18} />
                 </button>
-                <p className="mt-3 text-center text-xs text-content/40">
-                  השליחה פותחת חלון WhatsApp עם פרטי הפנייה.
-                </p>
+
+                {status === 'error' && (
+                  <p className="mt-3 flex items-center justify-center gap-2 text-center text-sm text-red-400">
+                    <AlertCircle size={16} />
+                    משהו השתבש בשליחה. נסו שוב או פנו אלינו ישירות במייל.
+                  </p>
+                )}
               </form>
             )}
           </Reveal>
