@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Link — דוגמאות אפקטים ל-Hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Rubik:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cyan: #22d3ee;
+        --teal: #14b8a6;
+        --emerald: #10b981;
+        --bg: #f7f9fb;
+        --ink: #0d1815;
+        --grad: linear-gradient(120deg, #22d3ee 0%, #14b8a6 50%, #10b981 100%);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Heebo', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        padding: 24px 16px 80px;
+        -webkit-font-smoothing: antialiased;
+      }
+      .page-head { max-width: 900px; margin: 0 auto 28px; text-align: center; }
+      .page-head h1 { font-family: 'Rubik'; font-size: clamp(26px, 5vw, 40px); font-weight: 900; }
+      .page-head h1 b { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .page-head p { margin-top: 10px; color: #5b6b66; font-size: 15px; }
+      .grid { max-width: 1000px; margin: 0 auto; display: grid; gap: 22px; }
+      .demo {
+        background: #fff; border: 1px solid rgba(13,24,21,.08); border-radius: 22px;
+        overflow: hidden; box-shadow: 0 10px 40px rgba(13,24,21,.05);
+      }
+      .demo-label { display: flex; align-items: center; gap: 10px; padding: 16px 20px; border-bottom: 1px solid rgba(13,24,21,.06); }
+      .num { flex: none; width: 30px; height: 30px; border-radius: 9px; background: var(--grad); color: #042; font-family: 'Rubik'; font-weight: 800; display: grid; place-items: center; }
+      .demo-label h2 { font-family: 'Rubik'; font-size: 18px; font-weight: 800; }
+      .demo-label span { color: #6b7a75; font-size: 13px; }
+      .stage { position: relative; height: 280px; display: grid; place-items: center; overflow: hidden; background: var(--bg); }
+      .headline { font-family: 'Rubik'; font-weight: 900; font-size: clamp(28px, 5vw, 46px); line-height: 1.1; text-align: center; position: relative; z-index: 2; }
+      .headline .g { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .hint { position: absolute; bottom: 12px; inset-inline: 0; text-align: center; font-size: 12px; color: #98a7a2; z-index: 5; }
+      canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div class="page-head">
+      <h1>אפקטים ל־<b>Hero</b> — דוגמאות חיות</h1>
+      <p>הזיזו את העכבר (או הזיזו אצבע במובייל) מעל כל אזור. כולם גם מונפשים אוטומטית. בחרו מספר ושלחו לי 🙂</p>
+    </div>
+
+    <div class="grid">
+      <!-- 1: Dot sphere -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">1</span><h2>כדור נקודות תלת-ממדי</h2><span>גלובוס נקודות מסתובב שמגיב לעכבר</span></div>
+        <div class="stage" id="s1">
+          <canvas id="c1"></canvas>
+          <div class="headline">Digital <span class="g">Link</span></div>
+        </div>
+      </section>
+
+      <!-- 2: Magnetic letters -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">2</span><h2>אותיות מגנטיות</h2><span>האותיות נמשכות לכיוון העכבר</span></div>
+        <div class="stage" id="s2">
+          <div class="headline" id="mag" dir="ltr"></div>
+          <div class="hint">הזיזו את העכבר מעל האותיות</div>
+        </div>
+      </section>
+
+      <!-- 3: Aurora -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">3</span><h2>גרדיאנט נוזלי (Aurora)</h2><span>זוהר צבעוני שזורם ברקע</span></div>
+        <div class="stage" id="s3">
+          <div class="aurora" id="aur"></div>
+          <div class="headline">הופכים נוכחות<br /><span class="g">דיגיטלית</span> לתוצאות</div>
+        </div>
+      </section>
+
+      <!-- 4: Spotlight -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">4</span><h2>Spotlight עוקב</h2><span>פנס אור שחושף צבע מתחת לסמן</span></div>
+        <div class="stage" id="s4" style="background:#0d1815;">
+          <div class="spot" id="spot"></div>
+          <div class="headline" style="color:#fff; z-index:3;">Your Digital <span class="g">Partner</span></div>
+          <div class="hint" style="color:#5b6b66;">הזיזו את העכבר</div>
+        </div>
+      </section>
+
+      <!-- 5: Rotating words -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">5</span><h2>מילים מתחלפות</h2><span>מילת המפתח מתחלפת בלופ</span></div>
+        <div class="stage" id="s5">
+          <div class="headline">מומחים ב<span class="g" id="rot">סושיאל</span></div>
+        </div>
+      </section>
+
+      <!-- 6: Floating parallax tags -->
+      <section class="demo">
+        <div class="demo-label"><span class="num">6</span><h2>תגיות צפות + פרלקס</h2><span>תגיות שירות שצפות ונעות עם העכבר</span></div>
+        <div class="stage" id="s6">
+          <div id="tags"></div>
+          <div class="headline">מערך דיגיטל <span class="g">מלא</span></div>
+        </div>
+      </section>
+    </div>
+
+    <style>
+      .aurora { position: absolute; inset: -30%; filter: blur(40px); opacity: .9; }
+      .aurora::before, .aurora::after, .aurora i {
+        content: ''; position: absolute; width: 50%; height: 60%; border-radius: 50%;
+      }
+      .spot { position: absolute; inset: 0; z-index: 2; background: radial-gradient(220px circle at var(--x,50%) var(--y,50%), rgba(34,211,238,.35), rgba(20,184,166,.18) 40%, transparent 70%); transition: background .08s; }
+      .tag { position: absolute; padding: 7px 14px; border-radius: 999px; background: #fff; border: 1px solid rgba(13,24,21,.1); font-size: 13px; font-weight: 700; color: #14b8a6; box-shadow: 0 6px 20px rgba(13,24,21,.06); will-change: transform; }
+      @keyframes floaty { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-14px)} }
+    </style>
+
+    <script>
+      // ---------- 1: Dot sphere ----------
+      (function () {
+        const c = document.getElementById('c1'), ctx = c.getContext('2d'), stage = document.getElementById('s1');
+        let w, h, pts = [], rotY = 0, rotX = 0, mx = 0, my = 0;
+        const N = 320, R = 95;
+        for (let i = 0; i < N; i++) {
+          const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = i * 2.399963;
+          pts.push([Math.cos(t) * r, y, Math.sin(t) * r]);
+        }
+        function size() { const dpr = Math.min(devicePixelRatio||1,2); w = stage.clientWidth; h = stage.clientHeight; c.width=w*dpr; c.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+        size(); addEventListener('resize', size);
+        stage.addEventListener('mousemove', e => { const b = stage.getBoundingClientRect(); mx = (e.clientX-b.left)/w-.5; my = (e.clientY-b.top)/h-.5; });
+        function draw() {
+          ctx.clearRect(0,0,w,h); rotY += 0.004 + mx*0.03; rotX += my*0.01 - rotX*0.05;
+          const cx=w/2, cy=h/2, cosY=Math.cos(rotY),sinY=Math.sin(rotY),cosX=Math.cos(rotX),sinX=Math.sin(rotX);
+          for (const p of pts) {
+            let x=p[0],y=p[1],z=p[2];
+            let x1=x*cosY - z*sinY, z1=x*sinY + z*cosY;
+            let y1=y*cosX - z1*sinX, z2=y*sinX + z1*cosX;
+            const scale=(z2+2)/3, px=cx+x1*R*scale, py=cy+y1*R*scale;
+            const a=(z2+1)/2;
+            ctx.fillStyle=`rgba(20,184,166,${a*0.9})`;
+            ctx.beginPath(); ctx.arc(px,py,1.6*scale,0,7); ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+
+      // ---------- 2: Magnetic letters ----------
+      (function () {
+        const host = document.getElementById('mag'), stage = document.getElementById('s2');
+        const text = 'DIGITAL LINK';
+        const spans = [...text].map(ch => { const s = document.createElement('span'); s.textContent = ch===' '?' ':ch; s.style.display='inline-block'; s.style.transition='transform .15s ease-out'; if('LINK'.includes(ch)&&text.indexOf(ch)>6){} host.appendChild(s); return s; });
+        let auto = 0, hasMouse = false;
+        stage.addEventListener('mousemove', e => { hasMouse = true; const b=stage.getBoundingClientRect();
+          spans.forEach(s => { const r=s.getBoundingClientRect(); const dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2); const d=Math.hypot(dx,dy); const f=Math.max(0,1-d/160)*26; s.style.transform=`translate(${dx/d*f||0}px,${dy/d*f||0}px)`; });
+        });
+        stage.addEventListener('mouseleave', () => spans.forEach(s=>s.style.transform=''));
+        (function tick(){ auto+=0.05; if(!hasMouse) spans.forEach((s,i)=> s.style.transform=`translateY(${Math.sin(auto+i*0.5)*7}px)`); requestAnimationFrame(tick); })();
+      })();
+
+      // ---------- 3: Aurora ----------
+      (function () {
+        const a = document.getElementById('aur');
+        a.innerHTML = '<i></i>';
+        const blobs = [
+          { el: a, c: 'rgba(34,211,238,.7)', t: 'before' },
+        ];
+        a.style.background = 'radial-gradient(40% 50% at 30% 30%, rgba(34,211,238,.75), transparent 70%),'
+          + 'radial-gradient(45% 55% at 70% 40%, rgba(20,184,166,.7), transparent 70%),'
+          + 'radial-gradient(40% 50% at 50% 75%, rgba(16,185,129,.65), transparent 70%)';
+        a.style.backgroundRepeat = 'no-repeat';
+        let t = 0;
+        (function tick(){ t += 0.005;
+          const x1=30+Math.sin(t)*18, y1=30+Math.cos(t*1.1)*16;
+          const x2=70+Math.cos(t*0.9)*16, y2=40+Math.sin(t*1.3)*18;
+          const x3=50+Math.sin(t*1.2)*20, y3=75+Math.cos(t)*12;
+          a.style.background = `radial-gradient(40% 50% at ${x1}% ${y1}%, rgba(34,211,238,.75), transparent 70%),`
+            + `radial-gradient(45% 55% at ${x2}% ${y2}%, rgba(20,184,166,.7), transparent 70%),`
+            + `radial-gradient(40% 50% at ${x3}% ${y3}%, rgba(16,185,129,.65), transparent 70%)`;
+          a.style.backgroundRepeat='no-repeat';
+          requestAnimationFrame(tick);
+        })();
+      })();
+
+      // ---------- 4: Spotlight ----------
+      (function () {
+        const stage = document.getElementById('s4'), spot = document.getElementById('spot');
+        let hasMouse=false,t=0;
+        stage.addEventListener('mousemove', e => { hasMouse=true; const b=stage.getBoundingClientRect(); spot.style.setProperty('--x',(e.clientX-b.left)+'px'); spot.style.setProperty('--y',(e.clientY-b.top)+'px'); });
+        (function tick(){ t+=0.02; if(!hasMouse){ const b=stage.getBoundingClientRect(); spot.style.setProperty('--x',(50+Math.sin(t)*30)+'%'); spot.style.setProperty('--y',(50+Math.cos(t*1.3)*25)+'%'); } requestAnimationFrame(tick); })();
+      })();
+
+      // ---------- 5: Rotating words ----------
+      (function () {
+        const el = document.getElementById('rot');
+        const words = ['סושיאל', 'PPC', 'SEO', 'GEO', 'דאטה', 'אוטומציה'];
+        let i = 0;
+        el.style.display='inline-block'; el.style.transition='transform .4s, opacity .4s';
+        setInterval(() => { el.style.opacity='0'; el.style.transform='translateY(-12px)';
+          setTimeout(() => { i=(i+1)%words.length; el.textContent=words[i]; el.style.opacity='1'; el.style.transform='translateY(0)'; }, 380);
+        }, 1800);
+      })();
+
+      // ---------- 6: Floating parallax tags ----------
+      (function () {
+        const host = document.getElementById('tags'), stage = document.getElementById('s6');
+        const data = [['SEO','12%','22%'],['PPC','74%','20%'],['סושיאל','18%','68%'],['GEO','80%','64%'],['דאטה','46%','14%'],['אוטומציה','40%','80%']];
+        const els = data.map((d,i) => { const t=document.createElement('div'); t.className='tag'; t.textContent=d[0]; t.style.left=d[1]; t.style.top=d[2]; t.style.animation=`floaty ${3+i*0.4}s ease-in-out ${i*0.3}s infinite`; host.appendChild(t); return t; });
+        stage.addEventListener('mousemove', e => { const b=stage.getBoundingClientRect(); const dx=(e.clientX-b.left)/b.width-.5, dy=(e.clientY-b.top)/b.height-.5;
+          els.forEach((t,i)=>{ const depth=(i%3+1)*10; t.style.transform=`translate(${dx*depth}px,${dy*depth}px)`; });
+        });
+      })();
+    </script>
+  </body>
+</html>
