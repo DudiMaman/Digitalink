@@ -6,7 +6,7 @@
   "description": "אתר נחיתה לסוכנות הדיגיטל Digitalink",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/make-v1.mjs",
+    "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

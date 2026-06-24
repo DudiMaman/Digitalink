@@ -8,7 +8,6 @@ import Portfolio from './components/Portfolio'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import VersionSwitch from './components/ui/VersionSwitch'
 
 export default function App() {
   return (
@@ -25,7 +24,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <VersionSwitch />
     </>
   )
 }

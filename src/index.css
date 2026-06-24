@@ -3,19 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  /* ====== Theme tokens (ברירת מחדל: כהה) ====== */
+  /* ====== Theme tokens (בהיר) ====== */
   :root {
-    --c-bg: 10 19 17; /* #0A1311 */
-    --c-elev: 15 27 24; /* #0F1B18 */
-    --c-text: 255 255 255;
-    --glass-bg: 255 255 255;
-    --glass-bg-alpha: 0.05;
-    --glass-border: 255 255 255;
-    --glass-border-alpha: 0.1;
-  }
-
-  /* ====== Light mode (גרסת V1) ====== */
-  html.light {
     --c-bg: 247 249 251; /* #F7F9FB */
     --c-elev: 255 255 255;
     --c-text: 13 24 21; /* #0D1815 צפחה כהה */
