@@ -1,23 +1,24 @@
 import { motion } from 'framer-motion'
-import { services } from '../data/content'
+import { useContent } from '../i18n'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
 import Tilt from './ui/Tilt'
 
 export default function Services() {
+  const { services } = useContent()
   return (
     <section id="services" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
-          eyebrow="מה אנחנו עושים"
-          title="מערך דיגיטל מלא תחת קורת גג אחת"
-          subtitle="מסושיאל שמייצר באזז ועד אוטומציה שמגדילה המרות — כל מה שצריך כדי לצמוח."
+          eyebrow={services.eyebrow}
+          title={services.title}
+          subtitle={services.subtitle}
         />
 
         {/* 6 קוביות אחידות — 3 בשורה בדסקטופ, מוערמות במובייל */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
+          {services.items.map((s, i) => (
             <Reveal key={s.id} delay={(i % 3) * 0.08}>
               <Tilt className="h-full">
                 <motion.div

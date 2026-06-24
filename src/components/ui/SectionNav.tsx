@@ -1,15 +1,9 @@
 import { useEffect, useState } from 'react'
-
-const sections = [
-  { id: 'hero', label: 'בית' },
-  { id: 'services', label: 'שירותים' },
-  { id: 'approach', label: 'הגישה' },
-  { id: 'process', label: 'תהליך' },
-  { id: 'contact', label: 'צור קשר' },
-]
+import { useContent } from '../../i18n'
 
 /** ניווט סקשנים צדדי — נקודות עם הדגשת הסקשן הפעיל וקפיצה חלקה. */
 export default function SectionNav() {
+  const sections = useContent().sectionNav
   const [active, setActive] = useState('hero')
 
   useEffect(() => {

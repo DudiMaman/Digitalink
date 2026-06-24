@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'framer-motion'
-import { stats } from '../data/content'
+import { useContent } from '../i18n'
 import Reveal from './ui/Reveal'
-
-type Stat = (typeof stats)[number]
 
 function CountUp({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null)
@@ -31,19 +29,20 @@ function CountUp({ value }: { value: number }) {
 }
 
 export default function Stats() {
+  const { stats } = useContent()
   return (
     <section className="relative py-14">
       <div className="container-base">
         <div className="glass overflow-hidden rounded-3xl">
           <div className="grid divide-content/10 sm:grid-cols-2 sm:divide-x sm:divide-x-reverse lg:grid-cols-4">
-            {stats.map((s: Stat, i) => (
+            {stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.1}>
                 <div className="flex flex-col items-center gap-2 px-6 py-10 text-center">
                   <div className="font-display text-4xl font-black sm:text-5xl">
                     <span className="text-gradient">
-                      {'prefix' in s && s.prefix ? s.prefix : ''}
+                      {s.prefix}
                       <CountUp value={s.value} />
-                      {s.suffix ?? ''}
+                      {s.suffix}
                     </span>
                   </div>
                   <p className="text-sm text-content/60">{s.label}</p>

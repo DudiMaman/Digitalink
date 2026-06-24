@@ -1,6 +1,6 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
-import { contact, contactInfo } from '../data/content'
+import { useContent, contactInfo } from '../i18n'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
 
@@ -15,31 +15,36 @@ type FormState = {
 type Errors = Partial<Record<keyof FormState, string>>
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-const empty: FormState = {
-  name: '',
-  phone: '',
-  email: '',
-  interest: contact.interests[0],
-  message: '',
-}
-
 export default function Contact() {
-  const [form, setForm] = useState<FormState>(empty)
+  const { contact } = useContent()
+  const f = contact.form
+
+  const [form, setForm] = useState<FormState>(() => ({
+    name: '',
+    phone: '',
+    email: '',
+    interest: contact.interests[0],
+    message: '',
+  }))
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<Status>('idle')
 
+  // עדכון ברירת המחדל של תחום העניין בעת החלפת שפה
+  useEffect(() => {
+    setForm((prev) => ({ ...prev, interest: contact.interests[0] }))
+  }, [contact])
+
   const update = (key: keyof FormState, value: string) => {
-    setForm((f) => ({ ...f, [key]: value }))
+    setForm((prev) => ({ ...prev, [key]: value }))
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
   const validate = (): boolean => {
     const next: Errors = {}
-    if (!form.name.trim()) next.name = 'נא להזין שם'
-    if (!/^[0-9+\-\s()]{7,}$/.test(form.phone.trim())) next.phone = 'נא להזין מספר טלפון תקין'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
-      next.email = 'נא להזין כתובת אימייל תקינה'
-    if (!form.message.trim()) next.message = 'נא לכתוב הודעה קצרה'
+    if (!form.name.trim()) next.name = f.errName
+    if (!/^[0-9+\-\s()]{7,}$/.test(form.phone.trim())) next.phone = f.errPhone
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) next.email = f.errEmail
+    if (!form.message.trim()) next.message = f.errMessage
     setErrors(next)
     return Object.keys(next).length === 0
   }
@@ -53,12 +58,12 @@ export default function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          שם: form.name,
-          טלפון: form.phone,
-          אימייל: form.email,
-          'תחום עניין': form.interest,
-          הודעה: form.message,
-          _subject: `פנייה חדשה מהאתר — ${form.name}`,
+          [f.name]: form.name,
+          [f.phone]: form.phone,
+          [f.email]: form.email,
+          [f.interest]: form.interest,
+          [f.message]: form.message,
+          _subject: `New inquiry — Digital Link — ${form.name}`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -66,7 +71,7 @@ export default function Contact() {
       const data = await res.json()
       if (res.ok && String(data.success) === 'true') {
         setStatus('sent')
-        setForm(empty)
+        setForm({ name: '', phone: '', email: '', interest: contact.interests[0], message: '' })
       } else {
         setStatus('error')
       }
@@ -91,20 +96,17 @@ export default function Contact() {
       </div>
 
       <div className="container-base">
-        <SectionTitle eyebrow="צרו קשר" title={contact.title} subtitle={contact.subtitle} />
+        <SectionTitle eyebrow={contact.eyebrow} title={contact.title} subtitle={contact.subtitle} />
 
-        {/* טופס ממורכז */}
         <div className="mx-auto max-w-2xl">
           <Reveal>
             {status === 'sent' ? (
               <div className="glass flex flex-col items-center justify-center gap-4 rounded-2xl p-10 text-center">
                 <CheckCircle2 size={56} className="text-brand-emerald" />
-                <h3 className="font-display text-2xl font-bold">תודה רבה!</h3>
-                <p className="max-w-sm text-content/60">
-                  קיבלנו את פנייתכם והיא נשלחה אלינו במייל. נחזור אליכם בהקדם 🙂
-                </p>
+                <h3 className="font-display text-2xl font-bold">{f.successTitle}</h3>
+                <p className="max-w-sm text-content/60">{f.successMsg}</p>
                 <button type="button" onClick={() => setStatus('idle')} className="btn-ghost mt-2">
-                  שליחת פנייה נוספת
+                  {f.sendAgain}
                 </button>
               </div>
             ) : (
@@ -112,7 +114,7 @@ export default function Contact() {
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="name" className="mb-2 block text-sm font-medium text-content/70">
-                      שם מלא
+                      {f.name}
                     </label>
                     <input
                       id="name"
@@ -120,14 +122,14 @@ export default function Contact() {
                       value={form.name}
                       onChange={(e) => update('name', e.target.value)}
                       className={`${inputBase} ${errors.name ? 'border-red-400' : 'border-content/10'}`}
-                      placeholder="ישראל ישראלי"
+                      placeholder={f.namePh}
                     />
                     {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
                   </div>
 
                   <div>
                     <label htmlFor="phone" className="mb-2 block text-sm font-medium text-content/70">
-                      טלפון
+                      {f.phone}
                     </label>
                     <input
                       id="phone"
@@ -135,15 +137,15 @@ export default function Contact() {
                       dir="ltr"
                       value={form.phone}
                       onChange={(e) => update('phone', e.target.value)}
-                      className={`${inputBase} text-right ${errors.phone ? 'border-red-400' : 'border-content/10'}`}
-                      placeholder="050-0000000"
+                      className={`${inputBase} text-start ${errors.phone ? 'border-red-400' : 'border-content/10'}`}
+                      placeholder={f.phonePh}
                     />
                     {errors.phone && <p className="mt-1 text-xs text-red-400">{errors.phone}</p>}
                   </div>
 
                   <div>
                     <label htmlFor="email" className="mb-2 block text-sm font-medium text-content/70">
-                      אימייל
+                      {f.email}
                     </label>
                     <input
                       id="email"
@@ -151,15 +153,15 @@ export default function Contact() {
                       dir="ltr"
                       value={form.email}
                       onChange={(e) => update('email', e.target.value)}
-                      className={`${inputBase} text-right ${errors.email ? 'border-red-400' : 'border-content/10'}`}
-                      placeholder="name@email.com"
+                      className={`${inputBase} text-start ${errors.email ? 'border-red-400' : 'border-content/10'}`}
+                      placeholder={f.emailPh}
                     />
                     {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
                   </div>
 
                   <div>
                     <label htmlFor="interest" className="mb-2 block text-sm font-medium text-content/70">
-                      תחום עניין
+                      {f.interest}
                     </label>
                     <select
                       id="interest"
@@ -178,7 +180,7 @@ export default function Contact() {
 
                 <div className="mt-5">
                   <label htmlFor="message" className="mb-2 block text-sm font-medium text-content/70">
-                    איך נוכל לעזור?
+                    {f.message}
                   </label>
                   <textarea
                     id="message"
@@ -186,7 +188,7 @@ export default function Contact() {
                     value={form.message}
                     onChange={(e) => update('message', e.target.value)}
                     className={`${inputBase} resize-none ${errors.message ? 'border-red-400' : 'border-content/10'}`}
-                    placeholder="ספרו לנו קצת על העסק והיעדים שלכם..."
+                    placeholder={f.messagePh}
                   />
                   {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
                 </div>
@@ -196,14 +198,14 @@ export default function Contact() {
                   disabled={status === 'sending'}
                   className="btn-primary mt-6 w-full disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {status === 'sending' ? 'שולח…' : 'שליחת הפנייה'}
+                  {status === 'sending' ? f.sending : f.submit}
                   <Send size={18} />
                 </button>
 
                 {status === 'error' && (
                   <p className="mt-3 flex items-center justify-center gap-2 text-center text-sm text-red-400">
                     <AlertCircle size={16} />
-                    משהו השתבש בשליחה. נסו שוב או פנו אלינו ישירות במייל.
+                    {f.errorMsg}
                   </p>
                 )}
               </form>

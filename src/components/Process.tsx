@@ -1,13 +1,14 @@
-import { process } from '../data/content'
+import { useContent } from '../i18n'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
 
 export default function Process() {
+  const { process } = useContent()
   return (
     <section id="process" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
-          eyebrow="התהליך"
+          eyebrow={process.eyebrow}
           title={process.title}
           subtitle={process.subtitle}
         />

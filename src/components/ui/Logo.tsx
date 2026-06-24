@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { brand } from '../../data/content'
+import { brand } from '../../i18n'
 
 type LogoProps = {
   showTagline?: boolean

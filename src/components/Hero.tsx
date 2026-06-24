@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
 import { ArrowUpLeft } from 'lucide-react'
-import { hero } from '../data/content'
+import { useContent } from '../i18n'
 import Magnetic from './ui/Magnetic'
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
 /** שורת כותרת שנחשפת כלפי מעלה מאחורי מסכה (mask reveal). */
-function RevealLine({ text, index }: { text: string; index: number }) {
+function RevealLine({ text, index, highlight }: { text: string; index: number; highlight: string }) {
   return (
     <span className="block overflow-hidden pb-[0.06em]">
       <motion.span
@@ -15,10 +15,10 @@ function RevealLine({ text, index }: { text: string; index: number }) {
         animate={{ y: 0 }}
         transition={{ duration: 0.9, delay: 0.1 + index * 0.12, ease: EASE }}
       >
-        {text.split(hero.highlight).map((part, j, arr) => (
+        {text.split(highlight).map((part, j, arr) => (
           <span key={j}>
             {part}
-            {j < arr.length - 1 && <span className="text-gradient">{hero.highlight}</span>}
+            {j < arr.length - 1 && <span className="text-gradient">{highlight}</span>}
           </span>
         ))}
       </motion.span>
@@ -27,6 +27,7 @@ function RevealLine({ text, index }: { text: string; index: number }) {
 }
 
 export default function Hero() {
+  const { hero } = useContent()
   return (
     <section
       id="hero"
@@ -58,7 +59,7 @@ export default function Hero() {
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-display text-4xl font-extrabold leading-[1.12] sm:text-6xl md:text-7xl">
             {hero.titleLines.map((line, i) => (
-              <RevealLine key={i} text={line} index={i} />
+              <RevealLine key={i} text={line} index={i} highlight={hero.highlight} />
             ))}
           </h1>
 

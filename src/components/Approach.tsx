@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
-import { approach } from '../data/content'
+import { useContent } from '../i18n'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
 
 export default function Approach() {
+  const { approach } = useContent()
   return (
     <section id="approach" className="relative py-16 sm:py-24">
       {/* הילה רקע */}
@@ -17,7 +18,7 @@ export default function Approach() {
 
       <div className="container-base">
         <SectionTitle
-          eyebrow="היתרון שלנו"
+          eyebrow={approach.eyebrow}
           title={approach.title}
           subtitle={approach.subtitle}
         />

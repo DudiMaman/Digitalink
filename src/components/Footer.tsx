@@ -1,7 +1,8 @@
-import { nav, brand } from '../data/content'
+import { useContent, brand } from '../i18n'
 import Logo from './ui/Logo'
 
 export default function Footer() {
+  const c = useContent()
   const year = new Date().getFullYear()
 
   return (
@@ -10,14 +11,12 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-start">
           <div className="max-w-xs">
             <Logo showTagline />
-            <p className="mt-4 text-sm text-content/55">
-              סוכנות דיגיטל שהופכת נוכחות לתוצאות — סושיאל, PPC, SEO, GEO ואוטומציית שיווק.
-            </p>
+            <p className="mt-4 text-sm text-content/55">{c.footer.description}</p>
           </div>
 
-          <nav aria-label="ניווט תחתון">
+          <nav aria-label="footer">
             <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              {nav.map((item) => (
+              {c.nav.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
@@ -32,7 +31,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-content/10 pt-6 text-center text-sm text-content/40">
-          © {year} {brand.name}. כל הזכויות שמורות.
+          © {year} {brand.name}. {c.footer.rights}
         </div>
       </div>
     </footer>
