@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpLeft } from 'lucide-react'
-import { hero, brand } from '../data/content'
+import { hero } from '../data/content'
 import CyberGrid from './ui/CyberGrid'
 import Magnetic from './ui/Magnetic'
 
@@ -86,15 +86,6 @@ export default function Hero() {
           </motion.p>
         </div>
       </div>
-
-      {/* שם המותג ברקע התחתון */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[18vw] font-black leading-none text-content/[0.03] md:text-[12vw]"
-        dir="ltr"
-      >
-        {brand.name}
-      </span>
     </section>
   )
 }
