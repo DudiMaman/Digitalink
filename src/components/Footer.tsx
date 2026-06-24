@@ -1,13 +1,5 @@
-import { Instagram, Facebook, Linkedin, Music2 } from 'lucide-react'
-import { nav, contactInfo, brand } from '../data/content'
+import { nav, brand } from '../data/content'
 import Logo from './ui/Logo'
-
-const socials = [
-  { icon: Instagram, href: contactInfo.social.instagram, label: 'Instagram' },
-  { icon: Facebook, href: contactInfo.social.facebook, label: 'Facebook' },
-  { icon: Linkedin, href: contactInfo.social.linkedin, label: 'LinkedIn' },
-  { icon: Music2, href: contactInfo.social.tiktok, label: 'TikTok' },
-]
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -37,21 +29,6 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
-
-          <div className="flex gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener"
-                aria-label={s.label}
-                className="glass flex h-10 w-10 items-center justify-center rounded-xl text-content/70 transition-colors hover:text-brand-cyan"
-              >
-                <s.icon size={18} />
-              </a>
-            ))}
-          </div>
         </div>
 
         <div className="mt-10 border-t border-content/10 pt-6 text-center text-sm text-content/40">
