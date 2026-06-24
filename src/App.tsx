@@ -11,7 +11,6 @@ import Footer from './components/Footer'
 import ScrollProgress from './components/ui/ScrollProgress'
 import SectionNav from './components/ui/SectionNav'
 import CursorGlow from './components/ui/CursorGlow'
-import Marquee from './components/ui/Marquee'
 
 export default function App() {
   return (
@@ -22,7 +21,6 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee />
         <Services />
         <Approach />
         <Process />

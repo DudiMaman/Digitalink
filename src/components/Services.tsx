@@ -11,7 +11,7 @@ export default function Services() {
   const rest = services.filter((s) => !s.flagship)
 
   return (
-    <section id="services" className="relative py-24 sm:py-32">
+    <section id="services" className="relative py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
           eyebrow="מה אנחנו עושים"

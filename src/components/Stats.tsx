@@ -32,7 +32,7 @@ function CountUp({ value }: { value: number }) {
 
 export default function Stats() {
   return (
-    <section className="relative py-20">
+    <section className="relative py-14">
       <div className="container-base">
         <div className="glass overflow-hidden rounded-3xl">
           <div className="grid divide-content/10 sm:grid-cols-2 sm:divide-x sm:divide-x-reverse lg:grid-cols-4">

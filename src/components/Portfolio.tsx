@@ -7,7 +7,7 @@ import Tilt from './ui/Tilt'
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="relative py-24 sm:py-32">
+    <section id="portfolio" className="relative py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
           eyebrow="תיק עבודות"

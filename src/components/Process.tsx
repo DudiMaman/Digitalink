@@ -4,7 +4,7 @@ import Reveal from './ui/Reveal'
 
 export default function Process() {
   return (
-    <section id="process" className="relative py-24 sm:py-32">
+    <section id="process" className="relative py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
           eyebrow="התהליך"

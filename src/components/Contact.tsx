@@ -72,7 +72,7 @@ export default function Contact() {
     'w-full rounded-xl border bg-elevated/70 px-4 py-3 text-content placeholder-content/35 outline-none transition-colors focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/30'
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
+    <section id="contact" className="relative py-16 sm:py-24">
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
         <div className="h-[28rem] w-[28rem] rounded-full bg-brand-emerald/10 blur-[150px]" />
       </div>

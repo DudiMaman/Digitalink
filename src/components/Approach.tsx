@@ -6,7 +6,7 @@ import Icon from './ui/Icon'
 
 export default function Approach() {
   return (
-    <section id="approach" className="relative py-24 sm:py-32">
+    <section id="approach" className="relative py-16 sm:py-24">
       {/* הילה רקע */}
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
         <div className="h-96 w-96 rounded-full bg-brand-teal/10 blur-[140px]" />

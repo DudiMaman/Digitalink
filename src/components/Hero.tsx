@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[85vh] flex-col justify-start overflow-hidden pt-36 sm:pt-44"
+      className="relative flex flex-col justify-start overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20"
     >
       {/* רקע — צורות גרדיאנט מרחפות עדינות */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -85,7 +85,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.85 }}
-            className="mt-12 text-sm uppercase tracking-[0.15em] text-content/40"
+            className="mt-9 text-sm uppercase tracking-[0.15em] text-content/40"
           >
             {hero.proof}
           </motion.p>
