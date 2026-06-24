@@ -4,6 +4,7 @@ import { services } from '../data/content'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
 import Icon from './ui/Icon'
+import Tilt from './ui/Tilt'
 
 export default function Services() {
   const flagship = services.find((s) => s.flagship)!
@@ -60,6 +61,7 @@ export default function Services() {
           {/* שאר השירותים */}
           {rest.map((s, i) => (
             <Reveal key={s.id} delay={i * 0.08}>
+              <Tilt className="h-full">
               <motion.div
                 whileHover={{ y: -6 }}
                 className="group h-full rounded-3xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
@@ -80,6 +82,7 @@ export default function Services() {
                   ))}
                 </ul>
               </motion.div>
+              </Tilt>
             </Reveal>
           ))}
         </div>

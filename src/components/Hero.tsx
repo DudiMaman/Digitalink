@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { ArrowUpLeft } from 'lucide-react'
 import { hero, brand } from '../data/content'
+import NetworkCanvas from './ui/NetworkCanvas'
+import Magnetic from './ui/Magnetic'
 
 export default function Hero() {
   return (
@@ -28,6 +30,8 @@ export default function Hero() {
             backgroundSize: '64px 64px',
           }}
         />
+        {/* רשת דיגיטלית אינטראקטיבית */}
+        <NetworkCanvas />
       </div>
 
       <div className="container-base">
@@ -67,13 +71,17 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <a href="#contact" className="btn-primary w-full sm:w-auto">
-              {hero.primaryCta}
-              <ArrowUpLeft size={20} />
-            </a>
-            <a href="#services" className="btn-ghost w-full sm:w-auto">
-              {hero.secondaryCta}
-            </a>
+            <Magnetic className="w-full sm:w-auto">
+              <a href="#contact" className="btn-primary w-full">
+                {hero.primaryCta}
+                <ArrowUpLeft size={20} />
+              </a>
+            </Magnetic>
+            <Magnetic className="w-full sm:w-auto">
+              <a href="#services" className="btn-ghost w-full">
+                {hero.secondaryCta}
+              </a>
+            </Magnetic>
           </motion.div>
 
           <motion.p

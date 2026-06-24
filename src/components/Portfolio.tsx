@@ -3,6 +3,7 @@ import { ArrowUpLeft } from 'lucide-react'
 import { portfolio } from '../data/content'
 import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
+import Tilt from './ui/Tilt'
 
 export default function Portfolio() {
   return (
@@ -17,6 +18,7 @@ export default function Portfolio() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {portfolio.cases.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.07}>
+              <Tilt className="h-full">
               <motion.article
                 whileHover={{ y: -6 }}
                 className="group relative h-full overflow-hidden rounded-2xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
@@ -43,6 +45,7 @@ export default function Portfolio() {
                   <ArrowUpLeft size={16} />
                 </span>
               </motion.article>
+              </Tilt>
             </Reveal>
           ))}
         </div>
