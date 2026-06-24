@@ -34,14 +34,23 @@ export default function Hero() {
     >
       {/* רקע — צורות גרדיאנט מרחפות עדינות */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 right-[-10%] h-[34rem] w-[34rem] animate-float rounded-full bg-brand-teal/20 blur-[130px]" />
         <div
-          className="absolute bottom-[-10%] left-[-10%] h-[30rem] w-[30rem] animate-float rounded-full bg-brand-cyan/15 blur-[130px]"
-          style={{ animationDelay: '2s' }}
+          className="absolute -top-32 right-[-10%] h-[34rem] w-[34rem] animate-float rounded-full"
+          style={{ background: 'radial-gradient(closest-side, rgba(20,184,166,0.22), transparent)' }}
         />
         <div
-          className="absolute right-1/3 top-1/3 h-[22rem] w-[22rem] animate-float rounded-full bg-brand-emerald/15 blur-[120px]"
-          style={{ animationDelay: '4s' }}
+          className="absolute bottom-[-10%] left-[-10%] h-[30rem] w-[30rem] animate-float rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(34,211,238,0.18), transparent)',
+            animationDelay: '2s',
+          }}
+        />
+        <div
+          className="absolute right-1/3 top-1/3 h-[22rem] w-[22rem] animate-float rounded-full"
+          style={{
+            background: 'radial-gradient(closest-side, rgba(16,185,129,0.18), transparent)',
+            animationDelay: '4s',
+          }}
         />
       </div>
 

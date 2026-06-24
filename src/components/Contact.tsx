@@ -84,7 +84,10 @@ export default function Contact() {
       className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24"
     >
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
-        <div className="h-[28rem] w-[28rem] rounded-full bg-brand-emerald/10 blur-[150px]" />
+        <div
+          className="h-[28rem] w-[28rem] rounded-full"
+          style={{ background: 'radial-gradient(closest-side, rgba(16,185,129,0.12), transparent)' }}
+        />
       </div>
 
       <div className="container-base">

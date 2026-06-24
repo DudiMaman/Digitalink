@@ -49,7 +49,7 @@
   .glass {
     border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
     background: rgb(var(--glass-bg) / var(--glass-bg-alpha));
-    @apply backdrop-blur-xl;
+    @apply backdrop-blur-md;
   }
 
   /* Signature animated gradient text */

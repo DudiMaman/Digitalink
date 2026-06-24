@@ -9,7 +9,10 @@ export default function Approach() {
     <section id="approach" className="relative py-16 sm:py-24">
       {/* הילה רקע */}
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
-        <div className="h-96 w-96 rounded-full bg-brand-teal/10 blur-[140px]" />
+        <div
+          className="h-96 w-96 rounded-full"
+          style={{ background: 'radial-gradient(closest-side, rgba(20,184,166,0.12), transparent)' }}
+        />
       </div>
 
       <div className="container-base">

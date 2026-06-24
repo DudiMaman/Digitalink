@@ -29,7 +29,10 @@ export default function CursorGlow() {
       style={{ x: sx, y: sy }}
       className="pointer-events-none fixed left-0 top-0 z-[45]"
     >
-      <div className="h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-teal/15 blur-[90px]" />
+      <div
+        className="h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ background: 'radial-gradient(closest-side, rgba(20,184,166,0.18), transparent)' }}
+      />
     </motion.div>
   )
 }
