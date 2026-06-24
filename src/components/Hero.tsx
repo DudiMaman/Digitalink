@@ -80,15 +80,6 @@ export default function Hero() {
               </a>
             </Magnetic>
           </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.85 }}
-            className="mt-9 text-sm uppercase tracking-[0.15em] text-content/40"
-          >
-            {hero.proof}
-          </motion.p>
         </div>
       </div>
     </section>
