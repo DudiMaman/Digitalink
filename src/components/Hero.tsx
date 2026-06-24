@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { ArrowUpLeft, Sparkles } from 'lucide-react'
+import { ArrowUpLeft } from 'lucide-react'
 import { hero, brand } from '../data/content'
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden pt-28"
+      className="relative flex min-h-[80vh] flex-col justify-start overflow-hidden pt-28 sm:pt-32"
     >
       {/* רקע גרדיאנט נע + צורות מרחפות */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -32,16 +32,6 @@ export default function Hero() {
 
       <div className="container-base">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="glass mb-7 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-brand-cyan"
-          >
-            <Sparkles size={16} />
-            {hero.eyebrow}
-          </motion.span>
-
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

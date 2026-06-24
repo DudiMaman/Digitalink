@@ -17,15 +17,11 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3 shadow-lg shadow-black/20' : 'py-5'
+        scrolled ? 'glass py-3 shadow-lg shadow-black/10' : 'py-4'
       }`}
     >
       <nav className="container-base flex items-center justify-between">
-        <a href="#hero" aria-label="Digital Link — לדף הבית">
-          <Logo />
-        </a>
-
-        {/* ניווט דסקטופ */}
+        {/* ניווט דסקטופ — בצד ימין */}
         <ul className="hidden items-center gap-8 lg:flex">
           {nav.map((item) => (
             <li key={item.href}>
@@ -39,11 +35,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a href="#contact" className="hidden btn-primary lg:inline-flex">
-          בואו נדבר
-        </a>
-
-        {/* כפתור מובייל */}
+        {/* כפתור תפריט מובייל — בצד ימין */}
         <button
           type="button"
           className="glass rounded-xl p-2.5 text-content lg:hidden"
@@ -53,6 +45,11 @@ export default function Navbar() {
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
+
+        {/* לוגו — בצד שמאל */}
+        <a href="#hero" aria-label="Digital Link — לדף הבית">
+          <Logo size="lg" showTagline />
+        </a>
       </nav>
 
       {/* תפריט מובייל */}
@@ -70,15 +67,6 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="mt-1">
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="btn-primary w-full"
-              >
-                בואו נדבר
-              </a>
-            </li>
           </ul>
         </div>
       )}
