@@ -371,12 +371,36 @@ const dictionaries: Record<Lang, Content> = { he, en }
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; c: Content }
 const LanguageContext = createContext<Ctx | null>(null)
 
+/** שפת התחלה: פרמטר ?lang ב-URL גובר, אחריו העדפה שמורה, אחרת עברית. */
+function readInitialLang(): Lang {
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get('lang')
+    if (fromUrl === 'en' || fromUrl === 'he') return fromUrl
+    const stored = localStorage.getItem('lang')
+    if (stored === 'en' || stored === 'he') return stored
+  } catch {
+    /* ignore */
+  }
+  return 'he'
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('he')
+  const [lang, setLang] = useState<Lang>(readInitialLang)
 
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr'
+    // שיקוף השפה ב-URL כדי שניתן יהיה לשתף לינק עם שפה מסוימת
+    try {
+      const url = new URL(window.location.href)
+      if (url.searchParams.get('lang') !== lang) {
+        url.searchParams.set('lang', lang)
+        window.history.replaceState({}, '', url)
+      }
+      localStorage.setItem('lang', lang)
+    } catch {
+      /* ignore */
+    }
   }, [lang])
 
   return (
