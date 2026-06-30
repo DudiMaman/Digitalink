@@ -191,6 +191,11 @@ const he = {
     { id: 'contact', label: 'צור קשר' },
   ],
   ui: { menuOpen: 'פתיחת תפריט', menuClose: 'סגירת תפריט', logoAria: 'Digital Link — לדף הבית', switchLabel: 'EN' },
+  meta: {
+    title: 'Digital Link | סוכנות דיגיטל — סושיאל, PPC, SEO, GEO ופיתוח',
+    description:
+      'Digital Link — Your Digital Partner. סוכנות דיגיטל לסושיאל מדיה, PPC, SEO, GEO, אוטומציית שיווק ופיתוח אתרים, אפליקציות ומערכות. הופכים נוכחות דיגיטלית לתוצאות.',
+  },
 }
 
 type Content = typeof he
@@ -364,6 +369,11 @@ const en: Content = {
     { id: 'contact', label: 'Contact' },
   ],
   ui: { menuOpen: 'Open menu', menuClose: 'Close menu', logoAria: 'Digital Link — home', switchLabel: 'עב' },
+  meta: {
+    title: 'Digital Link | Digital Agency — Social, PPC, SEO, GEO & Development',
+    description:
+      'Digital Link — Your Digital Partner. A digital agency for social media, PPC, SEO, GEO, marketing automation and development of websites, apps and systems. Turning digital presence into results.',
+  },
 }
 
 const dictionaries: Record<Lang, Content> = { he, en }
@@ -371,13 +381,11 @@ const dictionaries: Record<Lang, Content> = { he, en }
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; c: Content }
 const LanguageContext = createContext<Ctx | null>(null)
 
-/** שפת התחלה: פרמטר ?lang ב-URL גובר, אחריו העדפה שמורה, אחרת עברית. */
+/** שפת התחלה: פרמטר ?lang ב-URL גובר; אחרת ברירת המחדל היא עברית. */
 function readInitialLang(): Lang {
   try {
     const fromUrl = new URLSearchParams(window.location.search).get('lang')
     if (fromUrl === 'en' || fromUrl === 'he') return fromUrl
-    const stored = localStorage.getItem('lang')
-    if (stored === 'en' || stored === 'he') return stored
   } catch {
     /* ignore */
   }
@@ -388,8 +396,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(readInitialLang)
 
   useEffect(() => {
+    const c = dictionaries[lang]
     document.documentElement.lang = lang
     document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr'
+    // עדכון כותרת הטאב ותיאור ה-meta לפי השפה
+    document.title = c.meta.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', c.meta.description)
     // שיקוף השפה ב-URL כדי שניתן יהיה לשתף לינק עם שפה מסוימת
     try {
       const url = new URL(window.location.href)
@@ -397,7 +409,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         url.searchParams.set('lang', lang)
         window.history.replaceState({}, '', url)
       }
-      localStorage.setItem('lang', lang)
     } catch {
       /* ignore */
     }
