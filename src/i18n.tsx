@@ -25,6 +25,7 @@ export type Lang = 'he' | 'en'
 const he = {
   nav: [
     { label: 'שירותים', href: '#services' },
+    { label: 'פיתוח', href: '#development' },
     { label: 'הגישה שלנו', href: '#approach' },
     { label: 'תהליך', href: '#process' },
     { label: 'צור קשר', href: '#contact' },
@@ -91,6 +92,19 @@ const he = {
         bullets: ['דשבורדים ו-BI', 'GA4 ומעקב המרות', 'ניתוח ותובנות'],
         icon: 'BarChart3',
       },
+    ],
+  },
+  development: {
+    eyebrow: 'בנייה ופיתוח',
+    title: 'בונים את המוצר הדיגיטלי שלכם',
+    subtitle: 'מאתר תדמית ועד מערכת מורכבת — מפתחים פתרונות דיגיטליים מהירים, יציבים ומדויקים לצרכים שלכם.',
+    items: [
+      { title: 'אתרים ודפי נחיתה', description: 'אתרים מהירים, רספונסיביים ומותאמי-SEO — מדף נחיתה ממוקד-המרה ועד אתר תדמית מלא.', icon: 'Globe' },
+      { title: 'אפליקציות', description: 'אפליקציות מובייל ו-web מקצה לקצה — חוויית משתמש חלקה, ביצועים גבוהים וקוד שניתן להרחבה.', icon: 'Smartphone' },
+      { title: 'מערכות ניהול', description: 'מערכות ניהול, דשבורדים ו-CRM מותאמים אישית שמייעלים תהליכים ונותנים שליטה מלאה.', icon: 'LayoutDashboard' },
+      { title: 'פיצ׳רים ואינטגרציות', description: 'פיתוח פיצ׳רים מותאמים, חיבור ל-API, סליקה ואוטומציות שמחברות בין כל המערכות שלכם.', icon: 'Puzzle' },
+      { title: 'עיצוב מוצר UX/UI', description: 'מהאפיון ועד הפיקסל — ממשקים נקיים וידידותיים שממירים מבקרים ללקוחות.', icon: 'Palette' },
+      { title: 'תחזוקה ותמיכה', description: 'ליווי שוטף, עדכונים, ניטור ביצועים ואבטחה — שהמוצר יישאר תמיד חד, מהיר ובטוח.', icon: 'Wrench' },
     ],
   },
   approach: {
@@ -171,6 +185,7 @@ const he = {
   sectionNav: [
     { id: 'hero', label: 'בית' },
     { id: 'services', label: 'שירותים' },
+    { id: 'development', label: 'פיתוח' },
     { id: 'approach', label: 'הגישה' },
     { id: 'process', label: 'תהליך' },
     { id: 'contact', label: 'צור קשר' },
@@ -183,6 +198,7 @@ type Content = typeof he
 const en: Content = {
   nav: [
     { label: 'Services', href: '#services' },
+    { label: 'Development', href: '#development' },
     { label: 'Approach', href: '#approach' },
     { label: 'Process', href: '#process' },
     { label: 'Contact', href: '#contact' },
@@ -249,6 +265,19 @@ const en: Content = {
         bullets: ['Dashboards & BI', 'GA4 & conversion tracking', 'Analysis & insights'],
         icon: 'BarChart3',
       },
+    ],
+  },
+  development: {
+    eyebrow: 'Build & develop',
+    title: 'We build your digital product',
+    subtitle: 'From a brand site to a complex system — we develop fast, stable and precise digital solutions tailored to your needs.',
+    items: [
+      { title: 'Websites & landing pages', description: 'Fast, responsive, SEO-ready websites — from a conversion-focused landing page to a full brand site.', icon: 'Globe' },
+      { title: 'Applications', description: 'End-to-end mobile and web apps — smooth UX, high performance and clean, scalable code.', icon: 'Smartphone' },
+      { title: 'Management systems', description: 'Custom admin systems, dashboards and CRMs that streamline processes and give you full control.', icon: 'LayoutDashboard' },
+      { title: 'Features & integrations', description: 'Custom feature development, API connections, payments and automations that link all your systems.', icon: 'Puzzle' },
+      { title: 'Product design (UX/UI)', description: 'From spec to pixel — clean, friendly interfaces that turn visitors into customers.', icon: 'Palette' },
+      { title: 'Maintenance & support', description: 'Ongoing support, updates, performance monitoring and security — keeping your product sharp and fast.', icon: 'Wrench' },
     ],
   },
   approach: {
@@ -329,6 +358,7 @@ const en: Content = {
   sectionNav: [
     { id: 'hero', label: 'Home' },
     { id: 'services', label: 'Services' },
+    { id: 'development', label: 'Development' },
     { id: 'approach', label: 'Approach' },
     { id: 'process', label: 'Process' },
     { id: 'contact', label: 'Contact' },

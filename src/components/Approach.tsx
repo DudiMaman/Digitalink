@@ -7,7 +7,7 @@ import Icon from './ui/Icon'
 export default function Approach() {
   const { approach } = useContent()
   return (
-    <section id="approach" className="relative py-16 sm:py-24">
+    <section id="approach" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
       {/* הילה רקע */}
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
         <div

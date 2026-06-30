@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
+import Development from './components/Development'
 import Approach from './components/Approach'
 import Process from './components/Process'
 import Stats from './components/Stats'
@@ -20,6 +21,7 @@ export default function App() {
       <main>
         <Hero />
         <Services />
+        <Development />
         <Approach />
         <Process />
         <Stats />

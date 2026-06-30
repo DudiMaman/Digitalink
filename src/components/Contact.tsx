@@ -86,7 +86,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24"
+      className="relative py-16 sm:py-24"
     >
       <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
         <div

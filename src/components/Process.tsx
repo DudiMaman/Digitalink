@@ -5,7 +5,7 @@ import Reveal from './ui/Reveal'
 export default function Process() {
   const { process } = useContent()
   return (
-    <section id="process" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
+    <section id="process" className="relative py-16 sm:py-24">
       <div className="container-base">
         <SectionTitle
           eyebrow={process.eyebrow}

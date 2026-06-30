@@ -8,10 +8,15 @@ import {
   Palette,
   Eye,
   Zap,
+  Globe,
+  Smartphone,
+  LayoutDashboard,
+  Puzzle,
+  Wrench,
   type LucideProps,
 } from 'lucide-react'
 
-/** ממפה שם אייקון (מ-content.ts) לרכיב lucide. */
+/** ממפה שם אייקון (מ-content) לרכיב lucide. */
 const icons = {
   Share2,
   Target,
@@ -22,6 +27,11 @@ const icons = {
   Palette,
   Eye,
   Zap,
+  Globe,
+  Smartphone,
+  LayoutDashboard,
+  Puzzle,
+  Wrench,
 } as const
 
 export type IconName = keyof typeof icons
