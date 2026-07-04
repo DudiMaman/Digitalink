@@ -1,34 +1,36 @@
 import { useContent } from '../i18n'
-import SectionTitle from './ui/SectionTitle'
+import SectionHead from './ui/SectionHead'
 import Reveal from './ui/Reveal'
+import Stats from './Stats'
 
 export default function Process() {
   const { process } = useContent()
   return (
-    <section id="process" className="relative py-16 sm:py-24">
-      <div className="container-base">
-        <SectionTitle
-          eyebrow={process.eyebrow}
-          title={process.title}
-          subtitle={process.subtitle}
-        />
-
-        <div className="relative grid gap-6 md:grid-cols-4">
-          {/* קו מחבר (דסקטופ) */}
-          <div className="absolute right-0 left-0 top-9 hidden h-px bg-gradient-to-l from-brand-cyan/50 via-brand-teal/40 to-brand-emerald/30 md:block" />
-
-          {process.steps.map((s, i) => (
-            <Reveal key={s.step} delay={i * 0.1} className="relative">
-              <div className="flex flex-col items-center text-center md:items-start md:text-start">
-                <span className="relative z-10 flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border border-content/10 bg-elevated font-display text-2xl font-black text-gradient">
-                  {s.step}
+    <section
+      id="process"
+      className="relative z-[1] px-5 py-[clamp(48px,6vw,80px)] sm:px-8"
+      style={{
+        background:
+          'linear-gradient(180deg, transparent, rgba(124,92,255,.045) 30%, rgba(124,92,255,.045) 70%, transparent)',
+      }}
+    >
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHead eyebrow="PROCESS" title={process.title} subtitle={process.subtitle} />
+        <div className="grid grid-cols-1 gap-4 min-[700px]:grid-cols-4">
+          {process.steps.map((st, i) => (
+            <Reveal key={st.step} delay={i * 0.09}>
+              <div className="group h-full rounded-[20px] border border-content/[0.08] bg-white/75 p-7 shadow-[0_4px_20px_rgba(11,18,32,.04)] backdrop-blur-[8px] transition-all duration-300 hover:-translate-y-1 hover:border-brand-purple/50 hover:bg-white">
+                <span className="text-gradient mb-3.5 block font-grotesk text-[44px] font-bold leading-none">
+                  {st.step}
                 </span>
-                <h3 className="mt-5 font-display text-xl font-bold">{s.title}</h3>
-                <p className="mt-2 text-sm text-content/60">{s.description}</p>
+                <h3 className="mb-2 text-[19px] font-extrabold text-content">{st.title}</h3>
+                <p className="text-[15px] leading-[1.7] text-content/[0.58]">{st.description}</p>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Stats />
       </div>
     </section>
   )

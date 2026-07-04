@@ -1,36 +1,39 @@
-import { motion } from 'framer-motion'
 import { useContent } from '../i18n'
-import SectionTitle from './ui/SectionTitle'
+import SectionHead from './ui/SectionHead'
 import Reveal from './ui/Reveal'
-import Icon from './ui/Icon'
-import Tilt from './ui/Tilt'
 
 export default function Development() {
   const { development } = useContent()
   return (
-    <section id="development" className="relative py-16 sm:py-24">
-      <div className="container-base">
-        <SectionTitle
-          eyebrow={development.eyebrow}
+    <section
+      id="development"
+      className="relative z-[1] px-5 py-[clamp(80px,11vw,150px)] sm:px-8"
+      style={{
+        background:
+          'linear-gradient(180deg, transparent, rgba(14,124,255,.04) 30%, rgba(14,124,255,.04) 70%, transparent)',
+      }}
+    >
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHead
+          eyebrow="DEVELOPMENT"
+          eyebrowColor="text-brand-purple"
           title={development.title}
           subtitle={development.subtitle}
         />
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {development.items.map((item, i) => (
-            <Reveal key={item.title} delay={(i % 3) * 0.08}>
-              <Tilt className="h-full">
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="group h-full rounded-3xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
-                >
-                  <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-content/10 bg-content/5 text-brand-cyan transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-ink">
-                    <Icon name={item.icon} size={26} />
-                  </span>
-                  <h3 className="font-display text-xl font-bold">{item.title}</h3>
-                  <p className="mt-3 text-content/60">{item.description}</p>
-                </motion.div>
-              </Tilt>
+        <div
+          className="grid gap-[18px]"
+          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))' }}
+        >
+          {development.items.map((d, i) => (
+            <Reveal key={d.title} delay={(i % 3) * 0.08}>
+              <article className="group relative h-full overflow-hidden rounded-[22px] border border-content/[0.08] bg-white/85 p-7 shadow-card backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-purple/50 hover:bg-white hover:shadow-[0_24px_60px_rgba(124,92,255,.16)]">
+                <span
+                  className="absolute inset-x-[22px] top-0 h-0.5"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(124,92,255,.55), transparent)' }}
+                />
+                <h3 className="mb-2 text-[21px] font-extrabold tracking-tight text-content">{d.title}</h3>
+                <p className="text-[15.5px] leading-[1.75] text-content/[0.62]">{d.description}</p>
+              </article>
             </Reveal>
           ))}
         </div>

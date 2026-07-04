@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  /* ====== Theme tokens (בהיר) ====== */
+  /* ====== Theme tokens ====== */
   :root {
     --c-bg: 247 249 251; /* #F7F9FB */
     --c-elev: 255 255 255;
-    --c-text: 13 24 21; /* #0D1815 צפחה כהה */
+    --c-text: 11 18 32; /* #0B1220 */
     --glass-bg: 255 255 255;
-    --glass-bg-alpha: 0.7;
-    --glass-border: 13 24 21;
+    --glass-bg-alpha: 0.72;
+    --glass-border: 11 18 32;
     --glass-border-alpha: 0.08;
   }
 
@@ -24,10 +24,9 @@
   }
 
   ::selection {
-    @apply bg-brand-teal/40 text-content;
+    @apply bg-brand-blue/25 text-content;
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -35,60 +34,66 @@
     background: rgb(var(--c-bg));
   }
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(#22d3ee, #10b981);
+    background: linear-gradient(#0e7cff, #7c5cff);
     border-radius: 999px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(11, 18, 32, 0.35);
   }
 }
 
 @layer components {
   .container-base {
-    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
   }
 
-  /* Glassmorphism surface — מתאים את עצמו לכהה/בהיר */
+  /* Glassmorphism */
   .glass {
     border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
     background: rgb(var(--glass-bg) / var(--glass-bg-alpha));
-    @apply backdrop-blur-md;
+    @apply backdrop-blur-[18px];
   }
 
-  /* Signature animated gradient text */
+  /* טקסט גרדיאנט — כחול→סגול */
   .text-gradient {
-    @apply bg-brand-gradient bg-clip-text text-transparent;
-    background-size: 200% 200%;
-    @apply animate-gradient-pan;
+    background: linear-gradient(100deg, #0e7cff, #7c5cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* טקסט גרדיאנט תלת-גוני (Hero) — כחול→סגול→ורוד */
+  .text-gradient-tri {
+    background: linear-gradient(100deg, #0e7cff 10%, #7c5cff 55%, #d6409f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* תווית עינית (Space Grotesk) */
+  .eyebrow {
+    @apply font-grotesk text-[13px] font-semibold uppercase tracking-[0.22em];
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5
-           text-base font-bold transition-all duration-300 focus:outline-none
-           focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2
+    @apply inline-flex items-center justify-center gap-2 rounded-[14px] font-bold
+           transition-all duration-300 focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2
            focus-visible:ring-offset-surface;
   }
 
   .btn-primary {
-    @apply btn bg-brand-gradient bg-[length:200%_200%] font-bold text-ink
-           shadow-lg shadow-brand-teal/30 hover:bg-[position:100%_50%]
-           hover:shadow-brand-emerald/40 hover:-translate-y-0.5;
+    @apply btn bg-brand-gradient px-10 py-4 text-[17px] font-extrabold text-white
+           shadow-cta hover:-translate-y-0.5 hover:shadow-cta-hover;
   }
 
   .btn-ghost {
-    @apply btn glass text-content hover:bg-content/10 hover:-translate-y-0.5;
+    @apply btn border border-content/[0.12] bg-white/80 px-10 py-4 text-[17px]
+           font-semibold text-content backdrop-blur-sm shadow-card
+           hover:border-brand-blue/50 hover:bg-white;
   }
-}
-
-/* Aurora — תנועת רקע זורמת מבוססת transform (זול לציור, ידידותי למובייל) */
-@keyframes aurora1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(6%, 8%, 0) scale(1.2); }
-}
-@keyframes aurora2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.15); }
-  50% { transform: translate3d(-8%, -5%, 0) scale(1); }
-}
-@keyframes aurora3 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(5%, -7%, 0) scale(1.25); }
 }
 
 /* Respect reduced motion preferences */

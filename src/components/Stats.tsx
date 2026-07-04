@@ -5,18 +5,17 @@ import Reveal from './ui/Reveal'
 
 function CountUp({ value }: { value: number }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '-40px' })
   const [display, setDisplay] = useState(0)
   const isFloat = !Number.isInteger(value)
 
   useEffect(() => {
     if (!inView) return
-    const duration = 1400
+    const duration = 1600
     const start = performance.now()
     let raf = 0
     const tick = (now: number) => {
       const p = Math.min((now - start) / duration, 1)
-      // easing out-cubic
       const eased = 1 - Math.pow(1 - p, 3)
       setDisplay(value * eased)
       if (p < 1) raf = requestAnimationFrame(tick)
@@ -28,30 +27,23 @@ function CountUp({ value }: { value: number }) {
   return <span ref={ref}>{isFloat ? display.toFixed(1) : Math.round(display)}</span>
 }
 
+/** פס סטטיסטיקות עם count-up — משובץ בתוך סקשן התהליך. */
 export default function Stats() {
   const { stats } = useContent()
   return (
-    <section className="relative border-y border-content/5 bg-brand-teal/[0.06] py-14">
-      <div className="container-base">
-        <div className="glass overflow-hidden rounded-3xl">
-          <div className="grid divide-content/10 sm:grid-cols-2 sm:divide-x sm:divide-x-reverse lg:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.1}>
-                <div className="flex flex-col items-center gap-2 px-6 py-10 text-center">
-                  <div className="font-display text-4xl font-black sm:text-5xl">
-                    <span className="text-gradient">
-                      {s.prefix}
-                      <CountUp value={s.value} />
-                      {s.suffix}
-                    </span>
-                  </div>
-                  <p className="text-sm text-content/60">{s.label}</p>
-                </div>
-              </Reveal>
-            ))}
+    <Reveal delay={0.12}>
+      <div className="mt-[clamp(28px,4vw,48px)] grid grid-cols-1 overflow-hidden rounded-[24px] border border-content/[0.08] bg-white/80 shadow-[0_10px_40px_rgba(11,18,32,.06)] backdrop-blur-[10px] sm:grid-cols-2 min-[700px]:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="border-s border-content/[0.06] px-6 py-9 text-center">
+            <div dir="ltr" className="text-gradient font-grotesk text-[clamp(34px,4vw,46px)] font-bold">
+              {s.prefix}
+              <CountUp value={s.value} />
+              {s.suffix}
+            </div>
+            <div className="mt-1.5 text-[15px] font-medium text-content/60">{s.label}</div>
           </div>
-        </div>
+        ))}
       </div>
-    </section>
+    </Reveal>
   )
 }

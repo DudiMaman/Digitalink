@@ -1,41 +1,39 @@
-import { motion } from 'framer-motion'
 import { useContent } from '../i18n'
-import SectionTitle from './ui/SectionTitle'
 import Reveal from './ui/Reveal'
-import Icon from './ui/Icon'
 
 export default function Approach() {
   const { approach } = useContent()
   return (
-    <section id="approach" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
-      {/* הילה רקע */}
-      <div className="pointer-events-none absolute inset-0 -z-10 flex justify-center">
-        <div
-          className="h-96 w-96 rounded-full"
-          style={{ background: 'radial-gradient(closest-side, rgba(20,184,166,0.12), transparent)' }}
-        />
-      </div>
+    <section id="approach" className="relative z-[1] px-5 py-[clamp(80px,11vw,150px)] sm:px-8">
+      <div
+        className="mx-auto grid max-w-[1240px] items-start gap-[clamp(32px,5vw,72px)]"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))' }}
+      >
+        <Reveal className="lg:sticky lg:top-[110px]">
+          <span className="eyebrow text-brand-purple">OUR APPROACH</span>
+          <h2 className="mb-4 mt-3.5 text-[clamp(32px,5vw,58px)] font-extrabold leading-[1.12] tracking-tight text-content">
+            {approach.title}
+          </h2>
+          <p className="max-w-[460px] text-[17px] leading-[1.75] text-content/[0.62]">
+            {approach.subtitle}
+          </p>
+        </Reveal>
 
-      <div className="container-base">
-        <SectionTitle
-          eyebrow={approach.eyebrow}
-          title={approach.title}
-          subtitle={approach.subtitle}
-        />
-
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {approach.items.map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="glass h-full rounded-2xl p-6 transition-colors duration-300 hover:border-brand-teal/40"
-              >
-                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-ink">
-                  <Icon name={item.icon} size={24} />
+        <div className="flex flex-col">
+          {approach.items.map((r, i) => (
+            <Reveal key={r.title} delay={i * 0.1}>
+              <div className="group flex gap-[22px] border-b border-content/10 px-1 py-[30px] transition-all duration-300 hover:border-brand-blue/50 hover:ps-3.5">
+                <span
+                  className="shrink-0 font-grotesk text-[15px] font-semibold leading-[1.9] text-transparent"
+                  style={{ WebkitTextStroke: '1px rgba(14,124,255,.8)' }}
+                >
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-display text-lg font-bold">{item.title}</h3>
-                <p className="mt-2 text-sm text-content/60">{item.description}</p>
-              </motion.div>
+                <div>
+                  <h3 className="mb-2 text-[21px] font-extrabold text-content">{r.title}</h3>
+                  <p className="text-[15.5px] leading-[1.75] text-content/60">{r.description}</p>
+                </div>
+              </div>
             </Reveal>
           ))}
         </div>

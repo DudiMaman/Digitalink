@@ -1,47 +1,39 @@
-import { motion } from 'framer-motion'
 import { useContent } from '../i18n'
-import SectionTitle from './ui/SectionTitle'
+import SectionHead from './ui/SectionHead'
 import Reveal from './ui/Reveal'
-import Icon from './ui/Icon'
-import Tilt from './ui/Tilt'
 
 export default function Services() {
   const { services } = useContent()
   return (
-    <section id="services" className="relative border-y border-content/5 bg-brand-teal/[0.06] py-16 sm:py-24">
-      <div className="container-base">
-        <SectionTitle
-          eyebrow={services.eyebrow}
-          title={services.title}
-          subtitle={services.subtitle}
-        />
-
-        {/* 6 קוביות אחידות — 3 בשורה בדסקטופ, מוערמות במובייל */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <section id="services" className="relative z-[1] px-5 py-[clamp(80px,11vw,150px)] sm:px-8">
+      <div className="mx-auto max-w-[1240px]">
+        <SectionHead eyebrow="SERVICES" title={services.title} subtitle={services.subtitle} />
+        <div
+          className="grid gap-[18px]"
+          style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))' }}
+        >
           {services.items.map((s, i) => (
             <Reveal key={s.id} delay={(i % 3) * 0.08}>
-              <Tilt className="h-full">
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="group h-full rounded-3xl border border-content/10 bg-elevated/60 p-7 transition-colors duration-300 hover:border-brand-teal/40"
-                >
-                  <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-content/10 bg-content/5 text-brand-cyan transition-all duration-300 group-hover:bg-brand-gradient group-hover:text-ink">
-                    <Icon name={s.icon} size={26} />
-                  </span>
-                  <h3 className="font-display text-xl font-bold">{s.title}</h3>
-                  <p className="mt-3 text-content/60">{s.description}</p>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {s.bullets.map((b) => (
-                      <li
-                        key={b}
-                        className="rounded-full border border-content/10 px-3 py-1 text-xs text-content/55"
-                      >
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              </Tilt>
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-content/[0.08] bg-white/85 p-7 shadow-card backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-blue/45 hover:bg-white hover:shadow-card-hover">
+                <span
+                  className="absolute inset-x-[22px] top-0 h-0.5"
+                  style={{ background: 'linear-gradient(90deg, transparent, rgba(14,124,255,.55), transparent)' }}
+                />
+                <h3 className="mb-2.5 text-[22px] font-extrabold tracking-tight text-content">{s.title}</h3>
+                <p className="mb-[18px] flex-1 text-[15.5px] leading-[1.75] text-content/[0.62]">
+                  {s.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {s.bullets.map((chip) => (
+                    <span
+                      key={chip}
+                      className="rounded-full border border-content/10 bg-content/[0.03] px-3 py-[5px] text-[12.5px] font-semibold text-content/60"
+                    >
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>

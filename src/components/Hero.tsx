@@ -1,32 +1,35 @@
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpLeft } from 'lucide-react'
 import { useContent } from '../i18n'
-import Magnetic from './ui/Magnetic'
+import Reveal from './ui/Reveal'
 
-const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
-
-/** מילה מתחלפת בלולאה עם החלקה אנכית מאחורי מסכה. */
+/** מילה מתחלפת (רוטור) — fade + translateY, כמו במקור. */
 function RotatingWord({ words }: { words: string[] }) {
-  const [i, setI] = useState(0)
+  const [idx, setIdx] = useState(0)
+  const [show, setShow] = useState(true)
   useEffect(() => {
-    const id = setInterval(() => setI((v) => (v + 1) % words.length), 2200)
-    return () => clearInterval(id)
+    let to: ReturnType<typeof setTimeout>
+    const iv = setInterval(() => {
+      setShow(false)
+      to = setTimeout(() => {
+        setIdx((v) => (v + 1) % words.length)
+        setShow(true)
+      }, 460)
+    }, 2600)
+    return () => {
+      clearInterval(iv)
+      clearTimeout(to)
+    }
   }, [words])
   return (
-    <span className="relative block overflow-hidden py-[0.08em]">
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={i}
-          className="block text-gradient"
-          initial={{ y: '110%' }}
-          animate={{ y: '0%' }}
-          exit={{ y: '-110%' }}
-          transition={{ duration: 0.5, ease: EASE }}
-        >
-          {words[i]}
-        </motion.span>
-      </AnimatePresence>
+    <span
+      className="text-gradient-tri inline-block"
+      style={{
+        opacity: show ? 1 : 0,
+        transform: show ? 'none' : 'translateY(14px)',
+        transition: 'opacity .45s ease, transform .45s ease',
+      }}
+    >
+      {words[idx]}
     </span>
   )
 }
@@ -36,75 +39,31 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col justify-start overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20"
+      className="relative z-[1] flex min-h-[100svh] flex-col items-center justify-center px-5 pb-10 pt-[clamp(120px,16vh,180px)] text-center sm:px-8"
     >
-      {/* רקע Aurora — כתמי גרדיאנט זורמים */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div
-          className="absolute -top-[20%] right-[-10%] h-[40rem] w-[40rem] rounded-full"
-          style={{
-            background: 'radial-gradient(closest-side, rgba(34,211,238,0.38), transparent)',
-            animation: 'aurora1 16s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute top-[8%] left-[-15%] h-[38rem] w-[38rem] rounded-full"
-          style={{
-            background: 'radial-gradient(closest-side, rgba(20,184,166,0.36), transparent)',
-            animation: 'aurora2 21s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute bottom-[-25%] left-1/3 h-[34rem] w-[34rem] rounded-full"
-          style={{
-            background: 'radial-gradient(closest-side, rgba(16,185,129,0.32), transparent)',
-            animation: 'aurora3 18s ease-in-out infinite',
-          }}
-        />
-      </div>
+      <Reveal>
+        <h1 className="max-w-[1050px] text-[clamp(50px,9vw,116px)] font-black leading-[1.05] tracking-[-1px] text-content [text-wrap:balance]">
+          {hero.titlePrefix}{' '}
+          <RotatingWord words={hero.rotatingWords} />
+        </h1>
+      </Reveal>
 
-      <div className="container-base">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE }}
-            className="font-display text-4xl font-extrabold leading-[1.08] sm:text-6xl md:text-7xl"
-          >
-            <span className="block">{hero.titlePrefix}</span>
-            <RotatingWord words={hero.rotatingWords} />
-            <span className="block">{hero.titleSuffix}</span>
-          </motion.h1>
+      <Reveal delay={0.18}>
+        <p className="mx-auto mt-6 max-w-[680px] text-[clamp(17px,2vw,21px)] leading-[1.7] text-content/[0.68]">
+          {hero.subtitle}
+        </p>
+      </Reveal>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
-            className="mx-auto mt-7 max-w-2xl text-lg text-content/65 sm:text-xl"
-          >
-            {hero.subtitle}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <Magnetic className="w-full sm:w-auto">
-              <a href="#contact" className="btn-primary w-full">
-                {hero.primaryCta}
-                <ArrowUpLeft size={20} />
-              </a>
-            </Magnetic>
-            <Magnetic className="w-full sm:w-auto">
-              <a href="#services" className="btn-ghost w-full">
-                {hero.secondaryCta}
-              </a>
-            </Magnetic>
-          </motion.div>
+      <Reveal delay={0.28}>
+        <div className="mt-10 flex flex-wrap justify-center gap-3.5">
+          <a href="#contact" className="btn-primary">
+            {hero.primaryCta} <span aria-hidden="true">←</span>
+          </a>
+          <a href="#services" className="btn-ghost">
+            {hero.secondaryCta}
+          </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }

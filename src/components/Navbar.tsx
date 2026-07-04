@@ -4,72 +4,59 @@ import { useContent, useLang } from '../i18n'
 import Logo from './ui/Logo'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { lang, setLang } = useLang()
   const c = useContent()
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   const toggleLang = () => setLang(lang === 'he' ? 'en' : 'he')
 
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3 shadow-lg shadow-black/10' : 'py-4'
-      }`}
-    >
-      <nav className="container-base flex items-center justify-between">
-        {/* ניווט + שפה (דסקטופ) */}
-        <div className="hidden items-center gap-8 lg:flex">
-          <ul className="flex items-center gap-8">
-            {c.nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-sm font-medium text-content/70 transition-colors hover:text-content"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 py-3.5 sm:px-6">
+      <nav className="glass flex w-full max-w-[1240px] items-center justify-between gap-6 rounded-[18px] px-5 py-3 shadow-nav">
+        {/* CTA + שפה + המבורגר */}
+        <div className="flex items-center gap-2">
+          <a
+            href="#contact"
+            className="hidden rounded-xl bg-brand-gradient px-5 py-2.5 text-[15px] font-bold text-white shadow-cta transition-all hover:-translate-y-0.5 hover:shadow-cta-hover lg:inline-block"
+          >
+            {c.hero.primaryCta}
+          </a>
           <button
             type="button"
             onClick={toggleLang}
             aria-label="Switch language"
-            className="flex items-center gap-1.5 rounded-full border border-content/15 px-3 py-1.5 text-sm font-semibold text-content/70 transition-colors hover:border-brand-teal/40 hover:text-content"
+            className="flex items-center gap-1.5 rounded-xl border border-content/10 bg-white/70 px-3 py-2 text-sm font-semibold text-content transition-colors hover:border-brand-blue/40"
           >
             <Globe size={15} />
             {c.ui.switchLabel}
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label={c.ui.menuOpen}
+            className="grid h-11 w-11 place-items-center rounded-xl border border-content/10 bg-white/80 text-content lg:hidden"
+          >
+            <Menu size={18} />
           </button>
         </div>
 
-        {/* שפה + תפריט (מובייל) */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <button
-            type="button"
-            onClick={toggleLang}
-            aria-label="Switch language"
-            className="glass flex items-center gap-1 rounded-xl px-2.5 py-2 text-sm font-semibold text-content"
-          >
-            <Globe size={15} />
-            {c.ui.switchLabel}
-          </button>
-          <button
-            type="button"
-            className="glass rounded-xl p-2.5 text-content"
-            onClick={() => setOpen((v) => !v)}
-            aria-label={open ? c.ui.menuClose : c.ui.menuOpen}
-            aria-expanded={open}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+        {/* קישורים */}
+        <div className="hidden items-center gap-1 lg:flex">
+          {c.nav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="rounded-[10px] px-3.5 py-2 text-[15px] font-medium text-content/70 transition-colors hover:bg-brand-blue/[0.07] hover:text-content"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
 
         {/* לוגו */}
@@ -80,20 +67,32 @@ export default function Navbar() {
 
       {/* תפריט מובייל */}
       {open && (
-        <div className="container-base mt-3 lg:hidden">
-          <ul className="glass flex flex-col gap-1 rounded-2xl p-3">
-            {c.nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-xl px-4 py-3 text-base font-medium text-content/80 transition-colors hover:bg-content/10 hover:text-content"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-2 bg-surface/95 backdrop-blur-xl lg:hidden">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label={c.ui.menuClose}
+            className="absolute end-6 top-6 grid h-11 w-11 place-items-center rounded-xl border border-content/15 bg-white text-content"
+          >
+            <X size={18} />
+          </button>
+          {c.nav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="px-6 py-2.5 text-2xl font-extrabold text-content"
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="mt-4 rounded-2xl bg-brand-gradient px-9 py-3.5 text-lg font-bold text-white shadow-cta"
+          >
+            {c.hero.primaryCta}
+          </a>
         </div>
       )}
     </header>
