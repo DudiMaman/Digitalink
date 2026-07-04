@@ -42,7 +42,7 @@ export default function Hero() {
       className="relative z-[1] flex min-h-[100svh] flex-col items-center justify-center px-5 pb-10 pt-[clamp(120px,16vh,180px)] text-center sm:px-8"
     >
       <Reveal>
-        <h1 className="max-w-[1050px] text-[clamp(50px,9vw,116px)] font-black leading-[1.05] tracking-[-1px] text-content [text-wrap:balance]">
+        <h1 className="max-w-[900px] text-[clamp(36px,6vw,80px)] font-black leading-[1.08] tracking-[-1px] text-content [text-wrap:balance]">
           {hero.titlePrefix}{' '}
           <RotatingWord words={hero.rotatingWords} />
         </h1>
